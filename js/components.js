@@ -4,16 +4,16 @@
 function renderNavbar(activePage = '', isRoot = true) {
   const base = isRoot ? '' : '../';
   const pages = [
-    { href: `${base}index.html`,               label: 'Inicio',              id: 'home' },
-    { href: `${base}pages/servicios.html`,     label: 'Servicios',           id: 'servicios' },
-    { href: `${base}pages/instalaciones.html`, label: 'Instalaciones',       id: 'instalaciones' },
-    { href: `${base}pages/recorrido.html`,     label: 'Recorrido',           id: 'recorrido' },
-    { href: `${base}pages/referentes.html`,    label: 'Médicos Referentes',  id: 'referentes' },
-    { href: `${base}pages/contacto.html`,      label: 'Contacto',            id: 'contacto' },
+    { href: '/',               label: 'Inicio',              id: 'home' },
+    { href: '/pages/servicios.html',     label: 'Servicios',           id: 'servicios' },
+    { href: '/pages/instalaciones.html', label: 'Instalaciones',       id: 'instalaciones' },
+    { href: '/pages/recorrido.html',     label: 'Recorrido',           id: 'recorrido' },
+    { href: '/pages/referentes.html',    label: 'Médicos Referentes',  id: 'referentes' },
+    { href: '/pages/contacto.html',      label: 'Contacto',            id: 'contacto' },
   ];
   return `
 <nav class="navbar" id="mainNav">
-  <a class="navbar-logo" href="${base}index.html">
+  <a class="navbar-logo" href="/">
     <img src="${base}assets/img/logo.png" alt="CONRAD" onerror="this.style.display='none'">
     <span class="navbar-brand">CON<span>RAD</span></span>
   </a>
@@ -47,7 +47,7 @@ function renderFooter(isRoot = true) {
       </div>
       <div class="footer-col">
         <h4>Empresa</h4>
-        <a href="${base}index.html">Inicio</a>
+        <a href="/">Inicio</a>
         <a href="${base}pages/instalaciones.html">Instalaciones</a>
         <a href="${base}pages/recorrido.html">Recorrido Virtual</a>
         <a href="${base}pages/referentes.html">Médicos Referentes</a>
