@@ -121,29 +121,32 @@ function initChatbot() {
   toggle.addEventListener('click', () => win.classList.toggle('open'));
   closeBtn.addEventListener('click', () => win.classList.remove('open'));
 
-  // Auto-detect path: root or /pages/ subfolder
-  const isRoot = !window.location.pathname.includes('/pages/');
-  const apiPath = isRoot ? 'api/chat' : '../api/chat';
+  const _gk = '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';
+  const _sys = 'Eres el asistente virtual de CONRAD Centro de Diagnóstico en Chimaltenango, Guatemala. Servicios: Rayos X, Ultrasonidos 5D, Tomografías CT, Laboratorio, Mamografía, ECG, Papanicolau. Teléfono: 7725-2722. WhatsApp: 5460-5569. Visitadora médica: 3110-9147. Responde en español, conciso y amable. Para precios invita a llamar al 7725-2722.';
+  const _hist = [];
 
   async function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
     input.value = '';
     appendMsg(text, 'user');
+    _hist.push({ role: 'user', content: text });
     const typing = appendTyping();
     try {
-      const res = await fetch(apiPath, {
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
-      }).catch(() => null);
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _gk },
+        body: JSON.stringify({
+          model: 'llama3-8b-8192',
+          messages: [{ role: 'system', content: _sys }, ..._hist.slice(-8)],
+          max_tokens: 350, temperature: 0.4
+        })
+      });
       typing.remove();
-      if (res && res.ok) {
-        const data = await res.json();
-        appendMsg(data.reply || 'Sin respuesta.', 'bot');
-      } else {
-        appendMsg('Lo siento, intenta de nuevo.', 'bot');
-      }
+      const data = await res.json();
+      const reply = data.choices?.[0]?.message?.content || 'Lo siento, intenta de nuevo.';
+      _hist.push({ role: 'assistant', content: reply });
+      appendMsg(reply, 'bot');
     } catch(e) {
       typing.remove();
       appendMsg('Error de conexión.', 'bot');
