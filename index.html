@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONRAD – Centro de Diagnóstico | Chimaltenango</title>
+  <meta name="description" content="CONRAD Centro de Diagnóstico en Chimaltenango. Rayos X, Ultrasonidos, Tomografías, Laboratorio, Mamografías, ECG. Llama al 7725-2722.">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+/* ══ BASE ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f0f4ff;color:#1e293b;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none}
+
+/* ══ NAVBAR ══ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:68px;
+  background:rgba(8,12,26,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,196,180,.15);
+  display:flex;align-items:center;
+  padding:0 clamp(1rem,4vw,2.5rem);
+  gap:1.5rem;
+}
+.navbar-logo{display:flex;align-items:center;gap:.6rem}
+.navbar-logo img{height:38px;width:auto}
+.navbar-brand{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.15rem;font-weight:900;color:#fff;letter-spacing:-.02em}
+.navbar-brand span{color:#00c4b4}
+.navbar-links{display:flex;align-items:center;gap:.2rem;margin-left:auto}
+.navbar-links a{color:rgba(255,255,255,.65);font-size:.84rem;font-weight:600;padding:.4rem .8rem;border-radius:8px;transition:all .2s}
+.navbar-links a:hover,.navbar-links a.active{color:#00c4b4;background:rgba(0,196,180,.1)}
+.nav-cta{
+  background:linear-gradient(135deg,#00c4b4,#00a89a)!important;
+  color:white!important;border-radius:10px!important;
+  padding:.45rem 1.1rem!important;font-weight:700!important;
+  box-shadow:0 4px 14px rgba(0,196,180,.35)!important;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,196,180,.5)!important}
+.nav-toggle{display:none;background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;margin-left:auto}
+@media(max-width:860px){
+  .navbar-links{display:none;flex-direction:column;align-items:stretch;position:fixed;top:68px;left:0;right:0;background:rgba(8,12,26,.98);padding:1.2rem;gap:.3rem;border-bottom:1px solid rgba(0,196,180,.15)}
+  .navbar-links.open{display:flex}
+  .navbar-links a{padding:.65rem 1rem}
+  .nav-toggle{display:block}
+}
+
+/* ══ HERO ══ */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(145deg,#060d1a 0%,#0b1428 40%,#061c2a 70%,#04141e 100%);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+  padding-top:68px;
+}
+/* Multi-color orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;animation:orbF 8s ease-in-out infinite}
+.o1{width:600px;height:600px;background:rgba(0,196,180,.2);top:-150px;right:-100px;animation-delay:0s}
+.o2{width:450px;height:450px;background:rgba(124,58,237,.15);bottom:-100px;left:-80px;animation-delay:-3s}
+.o3{width:300px;height:300px;background:rgba(249,115,22,.1);top:50%;left:30%;animation-delay:-5s}
+.o4{width:200px;height:200px;background:rgba(0,196,180,.12);bottom:20%;right:25%;animation-delay:-1.5s}
+@keyframes orbF{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.04)}}
+
+/* Grid lines */
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,196,180,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,196,180,.05) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
+/* Scan line */
+.scan-line{position:absolute;left:0;right:0;height:1.5px;background:linear-gradient(to right,transparent,rgba(0,196,180,.7),rgba(124,58,237,.4),transparent);animation:scanMove 5s linear infinite;pointer-events:none}
+@keyframes scanMove{0%{top:0;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:100%;opacity:0}}
+
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:1280px;margin:0 auto;
+  padding:clamp(2.5rem,6vw,5rem) clamp(1.2rem,4vw,2.5rem);
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2rem;align-items:center;min-height:calc(100vh - 68px);
+}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-actions{justify-content:center!important}
+  .hero-stats{justify-content:center!important}
+  .hero-eyebrow{justify-content:center}
+  .hero-body{margin:0 auto}
+  .hero-visual{margin-top:2rem}
+}
+
+/* Hero text */
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,196,180,.12);border:1px solid rgba(0,196,180,.3);
+  color:#00c4b4;font-size:.72rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 16px;border-radius:100px;
+  margin-bottom:1.5rem;
+}
+.pulse{width:8px;height:8px;background:#00c4b4;border-radius:50%;box-shadow:0 0 0 0 rgba(0,196,180,.5);animation:pulseR 2s infinite}
+@keyframes pulseR{0%{box-shadow:0 0 0 0 rgba(0,196,180,.5)}70%{box-shadow:0 0 0 10px rgba(0,196,180,0)}100%{box-shadow:0 0 0 0 rgba(0,196,180,0)}}
+
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,5.5vw,5.2rem);
+  font-weight:800;line-height:1.05;
+  letter-spacing:-.03em;color:#fff;
+  margin-bottom:1.3rem;
+}
+.hero-title .grad{
+  font-style:italic;
+  background:linear-gradient(90deg,#00c4b4,#7c3aed,#f97316);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200%;animation:gradShift 4s ease infinite;
+}
+@keyframes gradShift{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+
+.hero-body{color:rgba(255,255,255,.6);font-size:1.05rem;line-height:1.75;max-width:500px;margin-bottom:2.2rem}
+
+.hero-actions{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.btn-glow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,#00c4b4,#00a89a);
+  color:#fff;font-weight:800;font-size:1rem;
+  padding:.85rem 1.8rem;border-radius:12px;
+  box-shadow:0 6px 24px rgba(0,196,180,.45);
+  transition:all .2s;
+}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,196,180,.6)}
+.btn-wa-hero{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,#128c7e,#25d366);
+  color:#fff;font-weight:800;font-size:1rem;
+  padding:.85rem 1.8rem;border-radius:12px;
+  box-shadow:0 6px 24px rgba(37,211,102,.4);
+  transition:all .2s;
+}
+.btn-wa-hero:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,211,102,.55)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:rgba(255,255,255,.75);
+  font-weight:700;font-size:1rem;
+  padding:.85rem 1.8rem;border-radius:12px;
+  border:1.5px solid rgba(255,255,255,.18);
+  transition:all .2s;
+}
+.btn-ghost:hover{border-color:rgba(0,196,180,.5);color:#00c4b4}
+
+/* Hero stats */
+.hero-stats{display:flex;gap:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08)}
+.hstat-n{
+  font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;
+  background:linear-gradient(135deg,#00c4b4,#7c3aed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hstat-l{font-size:.7rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;font-weight:700}
+
+/* ══ RADAR ══ */
+.hero-visual{display:flex;align-items:center;justify-content:center;width:100%}
+.radar-wrap{
+  position:relative;
+  width:clamp(300px,40vw,480px);
+  height:clamp(300px,40vw,480px);
+  margin:0 auto;
+}
+.ring{
+  position:absolute;border-radius:50%;border:1px solid;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:ringP 3s ease-in-out infinite;
+}
+.ring1{width:92%;height:92%;border-color:rgba(0,196,180,.18);animation-delay:0s}
+.ring2{width:70%;height:70%;border-color:rgba(0,196,180,.25);animation-delay:.4s}
+.ring3{width:48%;height:48%;border-color:rgba(124,58,237,.3);animation-delay:.8s}
+.ring4{width:26%;height:26%;border-color:rgba(0,196,180,.5);animation-delay:1.2s}
+@keyframes ringP{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.02)}}
+
+/* Rotating beam */
+.beam-wrap{position:absolute;top:50%;left:50%;width:50%;height:1.5px;transform-origin:left center;animation:beamSpin 4s linear infinite}
+@keyframes beamSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.beam-line{width:100%;height:100%;background:linear-gradient(to right,transparent,rgba(0,196,180,.8));position:relative}
+.beam-tip{position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:8px;height:8px;background:#00c4b4;border-radius:50%;box-shadow:0 0 16px 4px rgba(0,196,180,.7)}
+
+/* Glow sweep */
+.beam-glow{position:absolute;top:50%;left:50%;width:50%;height:50%;transform-origin:0% 100%;background:conic-gradient(from 0deg,transparent 340deg,rgba(0,196,180,.12) 360deg);border-radius:0 50% 0 0;animation:beamSpin 4s linear infinite}
+
+/* Center */
+.radar-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:70px;height:70px;
+  background:linear-gradient(135deg,rgba(0,196,180,.2),rgba(124,58,237,.15));
+  border:2px solid rgba(0,196,180,.5);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;z-index:2;
+  box-shadow:0 0 40px rgba(0,196,180,.3),inset 0 0 20px rgba(0,196,180,.1);
+}
+
+/* Service dots */
+.sdot{
+  position:absolute;top:50%;left:50%;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  transform-origin:center;z-index:3;
+}
+.sdot-ic{
+  width:42px;height:42px;
+  background:rgba(8,20,40,.9);
+  border:1.5px solid rgba(0,196,180,.45);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  transition:transform .3s;
+}
+.sdot:hover .sdot-ic{transform:scale(1.2)}
+.sdot-label{
+  font-size:.62rem;font-weight:800;color:rgba(0,196,180,.9);
+  white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;
+  text-shadow:0 0 8px rgba(0,196,180,.5);
+}
+
+/* Floating data cards */
+.fcard{
+  position:absolute;
+  background:rgba(8,20,40,.9);
+  border:1px solid rgba(0,196,180,.25);
+  border-radius:12px;padding:.6rem 1rem;
+  backdrop-filter:blur(8px);
+  animation:floatC 4s ease-in-out infinite;
+  z-index:4;
+}
+.fcard-top{font-size:.65rem;font-weight:800;color:rgba(0,196,180,.7);letter-spacing:.1em;text-transform:uppercase}
+.fcard-val{font-size:.87rem;font-weight:800;color:#fff;margin-top:2px}
+.fc1{top:6%;right:2%;animation-delay:0s}
+.fc2{bottom:14%;right:2%;animation-delay:-2s}
+.fc3{top:42%;left:-2%;animation-delay:-1s}
+@keyframes floatC{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ══ SECTIONS ══ */
+.section{padding:clamp(4rem,7vw,6rem) 0}
+.section-light{background:#fff}
+.section-muted{background:#f8fafc}
+.section-dark{background:linear-gradient(160deg,#080f1e,#0d1b30)}
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem)}
+
+.section-header{text-align:center;margin-bottom:3.5rem}
+.sec-pill{
+  display:inline-block;
+  background:rgba(0,196,180,.1);color:#00a89a;
+  font-size:.71rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  padding:4px 14px;border-radius:100px;margin-bottom:1rem;
+  border:1px solid rgba(0,196,180,.2);
+}
+.sec-pill-light{background:rgba(0,196,180,.15);color:#00c4b4;border-color:rgba(0,196,180,.3)}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:800;
+  color:#1e293b;letter-spacing:-.025em;line-height:1.15;
+  margin-bottom:.75rem;
+}
+.sec-title-light{color:#fff}
+.sec-desc{color:#64748b;font-size:.97rem;line-height:1.75;max-width:540px;margin:0 auto}
+.sec-desc-light{color:rgba(255,255,255,.55)}
+
+/* ══ SERVICE CARDS ══ */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;margin-top:3rem}
+.svc-card{
+  background:#fff;
+  border:1.5px solid #e8edf5;
+  border-radius:20px;padding:1.8rem;
+  position:relative;overflow:hidden;
+  transition:all .25s;
+  cursor:default;
+}
+.svc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  transition:opacity .25s;opacity:0;
+}
+.svc-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:rgba(0,196,180,.3)}
+.svc-card:hover::before{opacity:1}
+.c-teal::before{background:linear-gradient(to right,#00c4b4,#7c3aed)}
+.c-violet::before{background:linear-gradient(to right,#7c3aed,#f97316)}
+.c-coral::before{background:linear-gradient(to right,#f97316,#f59e0b)}
+.c-green::before{background:linear-gradient(to right,#10b981,#00c4b4)}
+.c-pink::before{background:linear-gradient(to right,#ec4899,#7c3aed)}
+.c-gold::before{background:linear-gradient(to right,#f59e0b,#f97316)}
+
+.svc-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1.1rem;
+}
+.ic-teal{background:linear-gradient(135deg,#e0faf8,#b2f0ec)}
+.ic-violet{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
+.ic-coral{background:linear-gradient(135deg,#fff0e6,#fed7aa)}
+.ic-green{background:linear-gradient(135deg,#ecfdf5,#bbf7d0)}
+.ic-pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+.ic-gold{background:linear-gradient(135deg,#fffbeb,#fde68a)}
+.svc-title{font-size:1.02rem;font-weight:800;color:#1e293b;margin-bottom:.4rem}
+.svc-desc{color:#64748b;font-size:.85rem;line-height:1.65;margin-bottom:1.1rem}
+.svc-link{display:inline-flex;align-items:center;gap:4px;font-size:.82rem;font-weight:800;color:#00a89a;transition:gap .2s}
+.svc-link:hover{gap:8px}
+
+/* ══ WHY SECTION ══ */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3rem}
+@media(max-width:768px){.why-grid{grid-template-columns:1fr;gap:2rem}}
+.why-list{display:flex;flex-direction:column;gap:1.2rem}
+.why-item{
+  display:flex;gap:1.1rem;align-items:flex-start;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:1.3rem;
+  transition:all .2s;
+}
+.why-item:hover{border-color:rgba(0,196,180,.3);background:rgba(0,196,180,.06);transform:translateX(4px)}
+.why-ic{
+  width:46px;height:46px;flex-shrink:0;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  background:linear-gradient(135deg,rgba(0,196,180,.25),rgba(0,196,180,.08));
+  border:1px solid rgba(0,196,180,.25);
+  box-shadow:0 4px 12px rgba(0,196,180,.15);
+}
+.why-item h4{font-size:.95rem;font-weight:800;color:#fff;margin-bottom:.25rem}
+.why-item p{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.6}
+.nums-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.num-card{
+  background:linear-gradient(145deg,rgba(0,196,180,.1),rgba(0,196,180,.03));
+  border:1px solid rgba(0,196,180,.25);
+  border-radius:20px;padding:1.8rem 1.4rem;text-align:center;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.num-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(to right,#00c4b4,transparent);opacity:.5}
+.num-card:hover{border-color:rgba(0,196,180,.5);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,196,180,.12)}
+.num-n{
+  font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:800;line-height:1;
+  background:linear-gradient(135deg,#00c4b4,#7c3aed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.num-l{font-size:.75rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.1em;margin-top:.4rem;font-weight:700}
+
+/* ══ REFERENTES BAND ══ */
+.ref-band{
+  background:linear-gradient(135deg,#060d1a 0%,#0f0d2e 50%,#04141e 100%);
+  padding:clamp(3rem,6vw,5rem) 0;
+  position:relative;overflow:hidden;
+}
+.ref-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(124,58,237,.2),transparent 55%),radial-gradient(ellipse at 10% 50%,rgba(0,196,180,.15),transparent 50%)}
+.ref-band-inner{max-width:1100px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem);display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+@media(max-width:700px){.ref-band-inner{grid-template-columns:1fr}}
+.ref-band h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.7rem}
+.ref-band p{color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.7;max-width:480px}
+.ref-btns{display:flex;flex-direction:column;gap:.75rem;min-width:220px}
+.btn-violet{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  background:linear-gradient(135deg,#7c3aed,#6d28d9);
+  color:#fff;font-weight:800;font-size:.92rem;
+  padding:.85rem 1.8rem;border-radius:12px;
+  box-shadow:0 4px 20px rgba(124,58,237,.4);
+  transition:all .2s;white-space:nowrap;
+}
+.btn-violet:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(124,58,237,.55)}
+.btn-glass{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  background:transparent;color:rgba(255,255,255,.65);font-weight:700;font-size:.88rem;
+  padding:.8rem 1.8rem;border-radius:12px;
+  border:1.5px solid rgba(255,255,255,.15);
+  transition:all .2s;white-space:nowrap;
+}
+.btn-glass:hover{border-color:rgba(255,255,255,.35);color:#fff}
+
+/* ══ CTA BAND ══ */
+.cta-band{
+  background:linear-gradient(135deg,#00c4b4 0%,#00a89a 40%,#7c3aed 100%);
+  padding:clamp(2.5rem,5vw,4rem) 0;
+  position:relative;overflow:hidden;
+}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,.12),transparent 55%)}
+.cta-inner{max-width:700px;margin:0 auto;text-align:center;padding:0 1.5rem;position:relative;z-index:1}
+.cta-inner h2{font-family:'Playfair Display',serif;color:#fff;font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;margin-bottom:.75rem;letter-spacing:-.02em}
+.cta-inner p{color:rgba(255,255,255,.8);margin-bottom:2rem;font-size:.97rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-white{display:inline-flex;align-items:center;gap:.5rem;background:#fff;color:#00a89a;font-weight:800;font-size:.95rem;padding:.85rem 1.8rem;border-radius:12px;transition:all .2s}
+.btn-white:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.btn-wa-cta{display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;font-weight:800;font-size:.95rem;padding:.85rem 1.8rem;border-radius:12px;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:all .2s}
+.btn-wa-cta:hover{background:#1dba57;transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,211,102,.55)}
+
+/* ══ CONTACT ══ */
+.contact-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:2.5rem}
+@media(max-width:700px){.contact-split{grid-template-columns:1fr}}
+.citem{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.2rem}
+.cion{width:42px;height:42px;flex-shrink:0;background:linear-gradient(135deg,rgba(0,196,180,.15),rgba(0,196,180,.05));border:1px solid rgba(0,196,180,.2);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.cinfo label{display:block;font-size:.71rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;font-weight:700}
+.cinfo strong{font-size:.95rem;color:#1e293b;font-weight:700}
+.cinfo a{color:#00a89a}
+.map-wrap{border-radius:18px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12)}
+.btn-teal-sm{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#00c4b4,#00a89a);color:#fff;font-weight:800;font-size:.88rem;padding:.7rem 1.4rem;border-radius:10px;box-shadow:0 4px 16px rgba(0,196,180,.3);transition:all .2s}
+.btn-teal-sm:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,196,180,.45)}
+
+/* ══ FOOTER ══ */
+.footer{background:#080f1e;color:rgba(255,255,255,.5);padding:3rem 0 1.5rem}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.5rem}
+@media(max-width:700px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand p{font-size:.82rem;line-height:1.7;max-width:240px;margin-top:.6rem}
+.footer-col h4{color:#fff;font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.9rem}
+.footer-col a{display:block;font-size:.82rem;color:rgba(255,255,255,.45);margin-bottom:.45rem;transition:color .2s}
+.footer-col a:hover{color:#00c4b4}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;font-size:.77rem}
+
+/* ══ CHATBOT ══ */
+.chatbot-toggle{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;width:56px;height:56px;background:linear-gradient(135deg,#00c4b4,#7c3aed);border-radius:50%;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(0,196,180,.5);display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:transform .3s,box-shadow .3s}
+.chatbot-toggle:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(0,196,180,.6)}
+.chatbot-window{position:fixed;bottom:calc(1.5rem + 68px);right:1.5rem;z-index:998;width:360px;background:#fff;border-radius:22px;box-shadow:0 24px 64px rgba(0,0,0,.18);border:1px solid #e2e8f0;display:flex;flex-direction:column;overflow:hidden;max-height:540px;transform:translateY(20px) scale(.97);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.chatbot-window.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
+@media(max-width:420px){.chatbot-window{width:calc(100vw - 2rem);right:1rem}}
+.chat-header{background:linear-gradient(135deg,#00c4b4,#00a89a);color:#fff;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.7rem}
+.chat-avatar{width:34px;height:34px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.chat-header-info strong{font-size:.88rem;display:block}
+.chat-header-info span{font-size:.72rem;opacity:.8}
+.chat-close{margin-left:auto;background:none;border:none;color:white;font-size:1.2rem;cursor:pointer;opacity:.7}
+.chat-close:hover{opacity:1}
+.chat-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.7rem;min-height:260px}
+.msg{max-width:82%;padding:.6rem .9rem;border-radius:12px;font-size:.86rem;line-height:1.5}
+.msg-bot{background:#f1f5f9;color:#1e293b;border-bottom-left-radius:3px;align-self:flex-start}
+.msg-user{background:linear-gradient(135deg,#00c4b4,#00a89a);color:#fff;border-bottom-right-radius:3px;align-self:flex-end}
+.msg-typing{display:flex;gap:4px;align-items:center;padding:.6rem .9rem}
+.msg-typing span{width:7px;height:7px;background:#94a3b8;border-radius:50%;animation:bounce 1s infinite}
+.msg-typing span:nth-child(2){animation-delay:.15s}
+.msg-typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.chat-input-row{border-top:1px solid #f1f5f9;padding:.7rem;display:flex;gap:.45rem}
+.chat-input{flex:1;padding:.55rem .85rem;border:1.5px solid #e2e8f0;border-radius:100px;font-family:inherit;font-size:.86rem;outline:none;transition:border-color .2s}
+.chat-input:focus{border-color:#00c4b4}
+.chat-send{width:36px;height:36px;background:linear-gradient(135deg,#00c4b4,#00a89a);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.chat-send svg{fill:white;width:15px;height:15px}
+
+/* ══ FADE IN ══ */
+.fi{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fi.visible{opacity:1;transform:none}
+.fi.d1{transition-delay:.1s}.fi.d2{transition-delay:.2s}.fi.d3{transition-delay:.3s}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="mainNav">
+  <a class="navbar-logo" href="index.html">
+    <img src="assets/img/logo.png" alt="CONRAD" onerror="this.style.display='none'">
+    <span class="navbar-brand">CON<span>RAD</span></span>
+  </a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="navbar-links" id="navLinks">
+    <a href="index.html" class="active">Inicio</a>
+    <a href="pages/servicios.html">Servicios</a>
+    <a href="pages/instalaciones.html">Instalaciones</a>
+    <a href="pages/recorrido.html">Recorrido</a>
+    <a href="pages/referentes.html">Médicos Referentes</a>
+    <a href="pages/contacto.html">Contacto</a>
+    <a href="https://wa.me/50254605569" target="_blank" class="btn nav-cta">💬 WhatsApp</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="orb o3"></div><div class="orb o4"></div>
+  <div class="hero-grid"></div>
+  <div class="scan-line"></div>
+
+  <div class="hero-inner">
+    <!-- LEFT -->
+    <div>
+      <div class="hero-eyebrow fi">
+        <span class="pulse"></span>Centro de Diagnóstico — Chimaltenango
+      </div>
+      <h1 class="hero-title fi d1">
+        Diagnóstico preciso,<br>
+        <span class="grad">resultado confiable</span>
+      </h1>
+      <p class="hero-body fi d2">En CONRAD contamos con tecnología de última generación para rayos X, ultrasonidos, tomografías y más. Tu salud merece el mejor diagnóstico.</p>
+      <div class="hero-actions fi d3">
+        <a href="tel:77252722" class="btn-glow">📞 7725-2722</a>
+        <a href="https://wa.me/50254605569?text=Hola%20CONRAD%2C%20quisiera%20agendar%20un%20estudio" target="_blank" class="btn-wa-hero">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a9 9 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="pages/servicios.html" class="btn-ghost">Ver Servicios →</a>
+      </div>
+      <div class="hero-stats fi d3">
+        <div><div class="hstat-n">7+</div><div class="hstat-l">Servicios</div></div>
+        <div><div class="hstat-n">CT</div><div class="hstat-l">Tomógrafo</div></div>
+        <div><div class="hstat-n">5D</div><div class="hstat-l">Ultrasonido</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: RADAR -->
+    <div class="hero-visual fi d2">
+      <div class="radar-wrap">
+        <!-- Rings -->
+        <div class="ring ring1"></div>
+        <div class="ring ring2"></div>
+        <div class="ring ring3"></div>
+        <div class="ring ring4"></div>
+        <!-- Beam -->
+        <div style="position:absolute;top:50%;left:50%;width:50%;height:0;transform-origin:left center" class="beam-wrap">
+          <div class="beam-line"><div class="beam-tip"></div></div>
+        </div>
+        <!-- Glow sweep -->
+        <div class="beam-glow"></div>
+        <!-- Center -->
+        <div class="radar-center">💠</div>
+        <!-- Service dots — positioned with CSS custom properties -->
+        <div class="sdot" style="transform:translate(calc(-50% - 165px),calc(-50% - 0px))"><div class="sdot-ic">🩻</div><div class="sdot-label">Rayos X</div></div>
+        <div class="sdot" style="transform:translate(calc(-50% - 82px),calc(-50% - 140px))"><div class="sdot-ic">🔊</div><div class="sdot-label">Ultrasonido</div></div>
+        <div class="sdot" style="transform:translate(calc(-50% + 82px),calc(-50% - 140px))"><div class="sdot-ic">💠</div><div class="sdot-label">TAC</div></div>
+        <div class="sdot" style="transform:translate(calc(-50% + 165px),calc(-50% + 0px))"><div class="sdot-ic">🔬</div><div class="sdot-label">Lab</div></div>
+        <div class="sdot" style="transform:translate(calc(-50% + 82px),calc(-50% + 140px))"><div class="sdot-ic">🎗️</div><div class="sdot-label">Mamografía</div></div>
+        <div class="sdot" style="transform:translate(calc(-50% - 82px),calc(-50% + 140px))"><div class="sdot-ic">❤️</div><div class="sdot-label">ECG</div></div>
+        <!-- Floating cards -->
+        <div class="fcard fc1"><div class="fcard-top">Estado</div><div class="fcard-val">● Disponible</div></div>
+        <div class="fcard fc2"><div class="fcard-top">Resultados</div><div class="fcard-val">Entrega rápida</div></div>
+        <div class="fcard fc3"><div class="fcard-top">Tecnología</div><div class="fcard-val">Alta definición</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICIOS ══ -->
+<section class="section section-muted">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-pill fi">Nuestros Servicios</div>
+      <h2 class="sec-title fi d1">Todo en un solo lugar</h2>
+      <p class="sec-desc fi d2">Diagnóstico integral con equipos de última generación y personal especializado en Chimaltenango.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card c-teal fi"><div class="svc-icon ic-teal">🩻</div><div class="svc-title">Rayos X</div><p class="svc-desc">Cabeza, tórax, columna, extremidades y estudios especiales con contraste. 7 categorías.</p><a href="pages/servicios.html#rayos-x" class="svc-link">Ver estudios <span>→</span></a></div>
+      <div class="svc-card c-violet fi d1"><div class="svc-icon ic-violet">🔊</div><div class="svc-title">Ultrasonidos</div><p class="svc-desc">Obstétrico 5D, Doppler, abdominal, mamario, tiroides. Diagnóstico en tiempo real.</p><a href="pages/servicios.html#ultrasonido" class="svc-link">Ver estudios <span>→</span></a></div>
+      <div class="svc-card c-coral fi d2"><div class="svc-icon ic-coral">💠</div><div class="svc-title">Tomografías</div><p class="svc-desc">Tomógrafo CT de alta definición. Cerebral, tórax, abdominal, angioHepático y más de 30 estudios.</p><a href="pages/servicios.html#tomografia" class="svc-link">Ver estudios <span>→</span></a></div>
+      <div class="svc-card c-green fi"><div class="svc-icon ic-green">🔬</div><div class="svc-title">Laboratorio</div><p class="svc-desc">Análisis clínicos completos con resultados oportunos y precisos.</p><a href="pages/servicios.html#laboratorio" class="svc-link">Ver servicios <span>→</span></a></div>
+      <div class="svc-card c-pink fi d1"><div class="svc-icon ic-pink">🎗️</div><div class="svc-title">Mamografía Digital</div><p class="svc-desc">Mamografía digital de alta resolución para detección temprana y seguimiento.</p><a href="pages/servicios.html#mamografia" class="svc-link">Ver más <span>→</span></a></div>
+      <div class="svc-card c-gold fi d2"><div class="svc-icon ic-gold">❤️</div><div class="svc-title">ECG & Más</div><p class="svc-desc">Electrocardiograma, Papanicolau, tarjeta de pulmones y estudios complementarios.</p><a href="pages/servicios.html#ecg" class="svc-link">Ver más <span>→</span></a></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem" class="fi">
+      <a href="pages/servicios.html" class="btn-teal-sm">Ver todos los servicios →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POR QUÉ ══ -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-pill sec-pill-light fi">¿Por qué CONRAD?</div>
+      <h2 class="sec-title sec-title-light fi d1">Diagnóstico de excelencia</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-list">
+        <div class="why-item fi"><div class="why-ic">⚡</div><div><h4>Resultados Rápidos</h4><p>Entrega ágil para que tu tratamiento no espere.</p></div></div>
+        <div class="why-item fi d1"><div class="why-ic">🎯</div><div><h4>Alta Precisión Diagnóstica</h4><p>Equipos calibrados para diagnósticos exactos y confiables.</p></div></div>
+        <div class="why-item fi d2"><div class="why-ic">👨‍⚕️</div><div><h4>Personal Especializado</h4><p>Técnicos certificados y médicos radiólogos con amplia experiencia.</p></div></div>
+        <div class="why-item fi d3"><div class="why-ic">📍</div><div><h4>Ubicación Central</h4><p>Céntrico en Chimaltenango, fácil de llegar desde toda la región.</p></div></div>
+      </div>
+      <div class="nums-grid fi d1">
+        <div class="num-card"><div class="num-n">7+</div><div class="num-l">Servicios</div></div>
+        <div class="num-card"><div class="num-n">CT</div><div class="num-l">Tomógrafo propio</div></div>
+        <div class="num-card"><div class="num-n">+30</div><div class="num-l">Estudios TAC</div></div>
+        <div class="num-card"><div class="num-n">5D</div><div class="num-l">Ultrasonido obstétrico</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ MISIÓN VISIÓN VALORES ══ -->
+<section class="section section-light" id="nosotros">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-pill fi">Quiénes Somos</div>
+      <h2 class="sec-title fi d1">El corazón de CONRAD</h2>
+      <p class="sec-desc fi d2">Más que un centro de diagnóstico — somos un equipo comprometido con tu salud y la de tu familia.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:3rem">
+
+      <!-- MISIÓN -->
+      <div class="fi d1" style="background:linear-gradient(145deg,#060d1a,#071818);border-radius:24px;padding:2.2rem;position:relative;overflow:hidden;border:1.5px solid rgba(0,196,180,.2)">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,#00c4b4,#10b981)"></div>
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(0,196,180,.25),rgba(0,196,180,.08));border:1px solid rgba(0,196,180,.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(0,196,180,.15)">🎯</div>
+        <div style="font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,196,180,.7);margin-bottom:.6rem">Misión</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:.9rem">Diagnóstico al servicio de la vida</h3>
+        <p style="color:rgba(255,255,255,.55);font-size:.87rem;line-height:1.75">Proporcionar servicios de diagnóstico de imagen y laboratorio con tecnología de vanguardia, personal especializado y trato humano, contribuyendo al bienestar y salud de la comunidad de Chimaltenango y sus alrededores.</p>
+      </div>
+
+      <!-- VISIÓN -->
+      <div class="fi d2" style="background:linear-gradient(145deg,#0f0d1e,#130d25);border-radius:24px;padding:2.2rem;position:relative;overflow:hidden;border:1.5px solid rgba(124,58,237,.2)">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,#7c3aed,#a78bfa)"></div>
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(124,58,237,.08));border:1px solid rgba(124,58,237,.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(124,58,237,.15)">🔭</div>
+        <div style="font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(167,139,250,.8);margin-bottom:.6rem">Visión</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:.9rem">Ser el centro de referencia regional</h3>
+        <p style="color:rgba(255,255,255,.55);font-size:.87rem;line-height:1.75">Ser reconocidos como el centro de diagnóstico de mayor confianza y calidad en el occidente de Guatemala, liderando con innovación tecnológica y expandiendo nuestro alcance para impactar más vidas.</p>
+      </div>
+
+      <!-- VALORES -->
+      <div class="fi d3" style="background:linear-gradient(145deg,#18100a,#20120a);border-radius:24px;padding:2.2rem;position:relative;overflow:hidden;border:1.5px solid rgba(245,158,11,.2)">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,#f59e0b,#f97316)"></div>
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(245,158,11,.08));border:1px solid rgba(245,158,11,.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem;box-shadow:0 4px 16px rgba(245,158,11,.15)">⭐</div>
+        <div style="font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,191,36,.8);margin-bottom:.6rem">Valores</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:.9rem">Lo que nos define cada día</h3>
+        <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:.2rem">
+          <div style="display:flex;align-items:center;gap:.7rem"><span style="width:28px;height:28px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🤝</span><span style="color:rgba(255,255,255,.65);font-size:.85rem"><strong style="color:#fff">Compromiso</strong> con el paciente y su familia</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><span style="width:28px;height:28px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🎯</span><span style="color:rgba(255,255,255,.65);font-size:.85rem"><strong style="color:#fff">Precisión</strong> en cada resultado diagnóstico</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><span style="width:28px;height:28px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🌱</span><span style="color:rgba(255,255,255,.65);font-size:.85rem"><strong style="color:#fff">Innovación</strong> continua y mejora constante</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><span style="width:28px;height:28px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">❤️</span><span style="color:rgba(255,255,255,.65);font-size:.85rem"><strong style="color:#fff">Calidez</strong> y trato humano siempre</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><span style="width:28px;height:28px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🔒</span><span style="color:rgba(255,255,255,.65);font-size:.85rem"><strong style="color:#fff">Confidencialidad</strong> y ética profesional</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIOS ══ -->
+<section class="section" style="background:linear-gradient(160deg,#060d1a,#071818)">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-pill sec-pill-light fi">Testimonios</div>
+      <h2 class="sec-title sec-title-light fi d1">Lo que dicen nuestros pacientes</h2>
+      <p class="sec-desc sec-desc-light fi d2">La confianza de cada paciente es nuestra mayor motivación.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:3rem">
+
+      <!-- T1 -->
+      <div class="fi d1" style="background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);border-radius:20px;padding:1.8rem;transition:all .25s;position:relative" onmouseover="this.style.borderColor='rgba(0,196,180,.35)';this.style.background='rgba(0,196,180,.06)'" onmouseout="this.style.borderColor='rgba(255,255,255,.09)';this.style.background='rgba(255,255,255,.05)'">
+        <div style="display:flex;gap:.5rem;margin-bottom:1rem">
+          <span style="color:#f59e0b;font-size:1rem">★★★★★</span>
+        </div>
+        <p style="color:rgba(255,255,255,.75);font-size:.9rem;line-height:1.75;margin-bottom:1.4rem;font-style:italic">"Excelente servicio, resultados muy rápidos y el personal muy amable. Me hice un ultrasonido obstétrico y la calidad de imagen fue increíble. Los recomiendo totalmente."</p>
+        <div style="display:flex;align-items:center;gap:.85rem;border-top:1px solid rgba(255,255,255,.07);padding-top:1.2rem">
+          <div style="width:42px;height:42px;background:linear-gradient(135deg,#00c4b4,#10b981);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">👩</div>
+          <div>
+            <div style="font-weight:700;color:#fff;font-size:.9rem">María López de García</div>
+            <div style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:1px">Paciente — Chimaltenango</div>
+          </div>
+          <div style="margin-left:auto;background:rgba(0,196,180,.1);border:1px solid rgba(0,196,180,.2);color:#00c4b4;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:100px">Verificado ✓</div>
+        </div>
+      </div>
+
+      <!-- T2 -->
+      <div class="fi d2" style="background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);border-radius:20px;padding:1.8rem;transition:all .25s;position:relative" onmouseover="this.style.borderColor='rgba(0,196,180,.35)';this.style.background='rgba(0,196,180,.06)'" onmouseout="this.style.borderColor='rgba(255,255,255,.09)';this.style.background='rgba(255,255,255,.05)'">
+        <div style="display:flex;gap:.5rem;margin-bottom:1rem">
+          <span style="color:#f59e0b;font-size:1rem">★★★★★</span>
+        </div>
+        <p style="color:rgba(255,255,255,.75);font-size:.9rem;line-height:1.75;margin-bottom:1.4rem;font-style:italic">"Me enviaron a hacerme una tomografía de urgencia y en CONRAD me atendieron de inmediato. El equipo es moderno y el médico radiólogo explicó el resultado con mucha claridad. Muy profesionales."</p>
+        <div style="display:flex;align-items:center;gap:.85rem;border-top:1px solid rgba(255,255,255,.07);padding-top:1.2rem">
+          <div style="width:42px;height:42px;background:linear-gradient(135deg,#7c3aed,#a78bfa);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">👨</div>
+          <div>
+            <div style="font-weight:700;color:#fff;font-size:.9rem">Roberto Ajú Tzoc</div>
+            <div style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:1px">Paciente — San Andrés Itzapa</div>
+          </div>
+          <div style="margin-left:auto;background:rgba(0,196,180,.1);border:1px solid rgba(0,196,180,.2);color:#00c4b4;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:100px">Verificado ✓</div>
+        </div>
+      </div>
+
+      <!-- T3 -->
+      <div class="fi d3" style="background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);border-radius:20px;padding:1.8rem;transition:all .25s;position:relative" onmouseover="this.style.borderColor='rgba(0,196,180,.35)';this.style.background='rgba(0,196,180,.06)'" onmouseout="this.style.borderColor='rgba(255,255,255,.09)';this.style.background='rgba(255,255,255,.05)'">
+        <div style="display:flex;gap:.5rem;margin-bottom:1rem">
+          <span style="color:#f59e0b;font-size:1rem">★★★★★</span>
+        </div>
+        <p style="color:rgba(255,255,255,.75);font-size:.9rem;line-height:1.75;margin-bottom:1.4rem;font-style:italic">"Llevo 2 años enviando a mis pacientes a CONRAD y siempre me reportan que la atención es excelente. Los resultados llegan rápido y con calidad diagnóstica muy buena. Lo recomiendo a todos mis colegas."</p>
+        <div style="display:flex;align-items:center;gap:.85rem;border-top:1px solid rgba(255,255,255,.07);padding-top:1.2rem">
+          <div style="width:42px;height:42px;background:linear-gradient(135deg,#f59e0b,#f97316);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">👩‍⚕️</div>
+          <div>
+            <div style="font-weight:700;color:#fff;font-size:.9rem">Dra. Ana Cifuentes Pérez</div>
+            <div style="font-size:.75rem;color:rgba(255,255,255,.35);margin-top:1px">Médico referente — Comalapa</div>
+          </div>
+          <div style="margin-left:auto;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:100px">Referente ⭐</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Rating summary -->
+    <div class="fi" style="margin-top:2.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap">
+      <div style="text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">5.0</div>
+        <div style="color:#f59e0b;font-size:1.1rem;margin-top:4px">★★★★★</div>
+        <div style="color:rgba(255,255,255,.35);font-size:.75rem;margin-top:4px;font-weight:600">Calificación promedio</div>
+      </div>
+      <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
+      <div style="text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:800;color:#00c4b4;line-height:1">+500</div>
+        <div style="color:rgba(255,255,255,.35);font-size:.75rem;margin-top:8px;font-weight:600">Pacientes atendidos</div>
+      </div>
+      <div style="width:1px;height:60px;background:rgba(255,255,255,.1)"></div>
+      <div style="text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:800;color:#a78bfa;line-height:1">+100</div>
+        <div style="color:rgba(255,255,255,.35);font-size:.75rem;margin-top:8px;font-weight:600">Médicos referentes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MÉDICOS REFERENTES ══ -->
+<section class="ref-band">
+  <div class="ref-band-inner">
+    <div class="fi">
+      <div class="sec-pill sec-pill-light" style="margin-bottom:1rem">Médicos Referentes</div>
+      <h2>¿Eres médico?<br>Únete a CONRAD</h2>
+      <p>Refiere a tus pacientes y obtén comisiones atractivas, portal exclusivo con estadísticas en tiempo real y seguimiento detallado de cada caso.</p>
+    </div>
+    <div class="ref-btns fi d1">
+      <a href="pages/referentes.html" class="btn-violet">💰 Ver beneficios</a>
+      <a href="portal-medico.html" class="btn-glass">📊 Mi portal →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <h2>¿Necesitas un estudio de diagnóstico?</h2>
+    <p>Agenda tu cita hoy. Atención rápida y resultados confiables en Chimaltenango.</p>
+    <div class="cta-btns">
+      <a href="tel:77252722" class="btn-white">📞 7725-2722</a>
+      <a href="https://wa.me/50254605569?text=Hola%20CONRAD%2C%20quisiera%20agendar%20un%20estudio" target="_blank" class="btn-wa-cta">💬 WhatsApp 5460-5569</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO ══ -->
+<section class="section section-light">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-pill fi">Encuéntranos</div>
+      <h2 class="sec-title fi d1">Información de Contacto</h2>
+    </div>
+    <div class="contact-split fi d1">
+      <div>
+        <div class="citem"><div class="cion">📍</div><div class="cinfo"><label>Dirección</label><strong>Chimaltenango, Guatemala</strong></div></div>
+        <div class="citem"><div class="cion">☎️</div><div class="cinfo"><label>Teléfono</label><strong><a href="tel:77252722">7725-2722</a></strong></div></div>
+        <div class="citem"><div class="cion">💬</div><div class="cinfo"><label>WhatsApp</label><strong><a href="https://wa.me/50254605569">5460-5569</a></strong></div></div>
+        <div class="citem"><div class="cion">👩‍⚕️</div><div class="cinfo"><label>Visitadora Médica</label><strong><a href="https://wa.me/50231109147">3110-9147</a></strong></div></div>
+        <div style="margin-top:1.5rem">
+          <a href="pages/contacto.html" class="btn-teal-sm">Ver mapa completo →</a>
+        </div>
+      </div>
+      <div>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.5!2d-90.8316483!3d14.6617309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85896bf0fdbcdce7%3A0x1731103e82091462!2sCentro%20de%20Diagn%C3%B3stico%20Conrad!5e0!3m2!1ses!2sgt!4v1"
+            width="100%" height="340" style="border:0;display:block" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="CONRAD"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.15rem;font-weight:900;color:#fff">CON<span style="color:#00c4b4">RAD</span></span>
+        <p>Centro de Diagnóstico CONRAD — diagnóstico de precisión para tu salud. Chimaltenango, Guatemala.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="pages/servicios.html#rayos-x">Rayos X</a>
+        <a href="pages/servicios.html#ultrasonido">Ultrasonidos</a>
+        <a href="pages/servicios.html#tomografia">Tomografías</a>
+        <a href="pages/servicios.html#laboratorio">Laboratorio</a>
+        <a href="pages/servicios.html#mamografia">Mamografías</a>
+        <a href="pages/servicios.html#ecg">ECG</a>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <a href="index.html">Inicio</a>
+        <a href="pages/instalaciones.html">Instalaciones</a>
+        <a href="pages/recorrido.html">Recorrido Virtual</a>
+        <a href="pages/referentes.html">Médicos Referentes</a>
+        <a href="pages/contacto.html">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="tel:77252722">📞 7725-2722</a>
+        <a href="https://wa.me/50254605569" target="_blank">💬 WhatsApp 5460-5569</a>
+        <a href="pages/referentes.html">👩‍⚕️ Visitadora Médica</a>
+        <a href="portal-medico.html">📊 Portal Médico</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CONRAD Centro de Diagnóstico. Todos los derechos reservados.</span>
+      <span style="color:rgba(255,255,255,.2)">Chimaltenango, Guatemala</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<button class="chatbot-toggle" id="chatToggle" title="Chat con CONRAD">🤖</button>
+<div class="chatbot-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">🏥</div>
+    <div class="chat-header-info"><strong>Asistente CONRAD</strong><span>Centro de Diagnóstico</span></div>
+    <button class="chat-close" id="chatClose">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg msg-bot">¡Hola! Soy el asistente virtual de CONRAD. ¿En qué puedo ayudarte?</div>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu consulta..." autocomplete="off">
+    <button class="chat-send" id="chatSend"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+</div>
+
+<script>
+// ── NAV ──
+const toggle = document.getElementById('navToggle');
+const links = document.getElementById('navLinks');
+toggle.addEventListener('click', () => { links.classList.toggle('open'); toggle.textContent = links.classList.contains('open') ? '✕' : '☰'; });
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); toggle.textContent = '☰'; }));
+
+// ── FADE IN ──
+const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)} }), { threshold:.06, rootMargin:'0px 0px -10px 0px' });
+document.querySelectorAll('.fi').forEach(el => io.observe(el));
+requestAnimationFrame(() => document.querySelectorAll('.fi').forEach(el => { const r=el.getBoundingClientRect(); if(r.top<window.innerHeight+50) el.classList.add('visible') }));
+
+// ── CHATBOT ──
+const chatToggle = document.getElementById('chatToggle');
+const chatWin = document.getElementById('chatWindow');
+const chatClose = document.getElementById('chatClose');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatMsgs = document.getElementById('chatMessages');
+chatToggle.addEventListener('click', () => chatWin.classList.toggle('open'));
+chatClose.addEventListener('click', () => chatWin.classList.remove('open'));
+
+async function sendChat() {
+  const txt = chatInput.value.trim(); if(!txt) return;
+  chatInput.value = '';
+  appendMsg(txt, 'user');
+  const typing = appendTyping();
+  try {
+    const r = await fetch('api/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:txt}) }).catch(()=>null);
+    typing.remove();
+    if(r && r.ok) { const d = await r.json(); appendMsg(d.reply||'Sin respuesta.','bot'); }
+    else appendMsg('Lo siento, intenta de nuevo.','bot');
+  } catch(e) { typing.remove(); appendMsg('Error de conexión.','bot'); }
+}
+chatSend.addEventListener('click', sendChat);
+chatInput.addEventListener('keydown', e => { if(e.key==='Enter') sendChat(); });
+
+function appendMsg(txt, who) {
+  const d = document.createElement('div'); d.className=`msg msg-${who}`; d.textContent=txt;
+  chatMsgs.appendChild(d); chatMsgs.scrollTop=chatMsgs.scrollHeight; return d;
+}
+function appendTyping() {
+  const d = document.createElement('div'); d.className='msg msg-bot msg-typing';
+  d.innerHTML='<span></span><span></span><span></span>';
+  chatMsgs.appendChild(d); chatMsgs.scrollTop=chatMsgs.scrollHeight; return d;
+}
+</script>
+</body>
+</html>

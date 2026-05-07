@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto – CONRAD Centro de Diagnóstico</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div id="header-root"></div>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Contacto</span></div>
+  <h1>Contáctanos</h1>
+  <p>Estamos aquí para ayudarte — llama, escribe o visítanos</p>
+</div>
+
+<section class="section section-gray">
+  <div class="container">
+    <div class="contact-grid fade-in">
+      <div>
+        <h3 style="font-family:var(--font-display);color:#071828;margin-bottom:1.5rem;font-size:1.4rem;">Información de Contacto</h3>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-info"><label>Dirección</label><strong>Chimaltenango, Guatemala</strong></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">☎️</div>
+          <div class="contact-info"><label>Teléfono / Fax</label><strong><a href="tel:77252722" style="color:var(--teal);">7725-2722</a></strong></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div class="contact-info"><label>WhatsApp CONRAD</label><strong><a href="https://wa.me/50254605569" target="_blank" style="color:var(--teal);">5460-5569</a></strong></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">👩‍⚕️</div>
+          <div class="contact-info"><label>Visitadora Médica (Referentes)</label><strong><a href="https://wa.me/50231109147" target="_blank" style="color:var(--teal);">3110-9147</a></strong></div>
+        </div>
+
+        <div style="margin-top:2rem;display:flex;flex-direction:column;gap:0.75rem;">
+          <a href="tel:77252722" class="btn btn-outline-teal btn-lg">📞 Llamar ahora — 7725-2722</a>
+          <a href="https://wa.me/50254605569?text=Hola%20CONRAD,%20quisiera%20agendar%20un%20estudio" target="_blank" class="btn btn-whatsapp btn-lg">💬 WhatsApp — 5460-5569</a>
+          <a href="https://wa.me/50231109147?text=Hola,%20me%20interesa%20el%20programa%20de%20M%C3%A9dicos%20Referentes" target="_blank" class="btn btn-lg" style="background:#071828;color:white;">👩‍⚕️ Visitadora Médica — 3110-9147</a>
+        </div>
+      </div>
+
+      <div class="fade-in fade-in-delay-1">
+        <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.5!2d-90.8316483!3d14.6617309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85896bf0fdbcdce7%3A0x1731103e82091462!2sCentro%20de%20Diagn%C3%B3stico%20Conrad!5e0!3m2!1ses!2sgt!4v1"
+            width="100%" height="420" style="border:0;display:block;"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title="Mapa CONRAD Chimaltenango">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label fade-in">Horarios</span>
+      <h2 class="section-title fade-in fade-in-delay-1">¿Cuándo puedes visitarnos?</h2>
+    </div>
+    <div style="max-width:500px;margin:0 auto;" class="fade-in">
+      <div style="background:var(--off-white);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--gray-200);">
+        <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-weight:600;color:#071828;">Lunes – Viernes</span>
+          <span style="color:var(--teal);font-weight:700;">Consultar horario</span>
+        </div>
+        <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-weight:600;color:#071828;">Sábado</span>
+          <span style="color:var(--teal);font-weight:700;">Consultar horario</span>
+        </div>
+        <div style="padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-weight:600;color:#071828;">Domingo</span>
+          <span style="color:var(--teal);font-weight:700;">Consultar horario</span>
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--gray-400);font-size:0.82rem;margin-top:1rem;">Para horarios exactos, comunícate al <a href="tel:77252722" style="color:var(--teal);">7725-2722</a></p>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<div id="chatbot-root"></div>
+<script src="../js/components.js"></script>
+<script>
+  document.getElementById('header-root').innerHTML = renderNavbar('contacto', false);
+  document.getElementById('footer-root').innerHTML = renderFooter(false);
+  document.getElementById('chatbot-root').innerHTML = renderChatbot();
+</script>
+</body>
+</html>

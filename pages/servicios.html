@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios – CONRAD Centro de Diagnóstico</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b1623;--ink2:#121f2e;
+  --teal:#0aa8aa;--teal2:#07888a;--teal3:#0dcfcf;
+  --white:#fff;--mist:#f0f5f8;--gray:#64748b;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;color:#060d1a;overflow-x:hidden}
+
+/* ── PAGE HERO ── */
+.svc-hero{
+  background:#060d1a;
+  padding:calc(70px + 3.5rem) 0 3.5rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.svc-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(13,208,208,.09) 1px,transparent 1px);background-size:32px 32px}
+.svc-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(13,208,208,.35),transparent)}
+.svc-hero-inner{position:relative;z-index:1}
+.sh-eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(13,208,208,.1);border:1px solid rgba(13,208,208,.28);color:var(--teal3);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:1.2rem}
+.ep{width:7px;height:7px;background:var(--teal3);border-radius:50%;animation:ep 2s infinite}
+@keyframes ep{0%,100%{opacity:1}50%{opacity:.3}}
+.sh-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;color:var(--white);letter-spacing:-.03em;line-height:1.1;margin-bottom:.8rem}
+.sh-sub{color:rgba(255,255,255,.48);font-size:.98rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
+
+/* ── SERVICE NAV PILLS ── */
+.svc-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;max-width:800px;margin:0 auto}
+.svc-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border-radius:100px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.65);font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap}
+.svc-pill:hover{border-color:rgba(13,208,208,.45);color:var(--teal3);background:rgba(13,208,208,.08)}
+
+/* ── SECTION SEPARATOR ── */
+.svc-sep{height:1px;background:linear-gradient(to right,transparent,var(--mist),transparent);margin:0}
+
+/* ── SERVICE SECTION ── */
+.svc-sec{padding:clamp(3.5rem,7vw,5.5rem) 0}
+.svc-sec:nth-child(even){background:var(--mist)}
+.svc-sec:nth-child(odd){background:var(--white)}
+.svc-sec-inner{max-width:1200px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem)}
+
+/* SECTION HEADER with icon badge */
+.svc-sec-header{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2.5rem}
+.svc-sec-badge{
+  width:68px;height:68px;flex-shrink:0;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;
+}
+.badge-blue{background:linear-gradient(135deg,#e8f4fd,#c5e2f5);box-shadow:0 4px 16px rgba(30,120,200,.15)}
+.badge-teal{background:linear-gradient(135deg,#e0f7f7,#b2ecec);box-shadow:0 4px 16px rgba(10,168,170,.15)}
+.badge-purple{background:linear-gradient(135deg,#f0eaff,#ddd0ff);box-shadow:0 4px 16px rgba(120,80,200,.12)}
+.badge-green{background:linear-gradient(135deg,#e6f9f0,#c0f0d5);box-shadow:0 4px 16px rgba(30,160,80,.12)}
+.badge-pink{background:linear-gradient(135deg,#fce8f3,#f5c0df);box-shadow:0 4px 16px rgba(200,60,120,.1)}
+.badge-orange{background:linear-gradient(135deg,#fff3e0,#ffdcac);box-shadow:0 4px 16px rgba(220,130,30,.12)}
+.svc-sec-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#060d1a;letter-spacing:-.02em;margin-bottom:.35rem}
+.svc-sec-text p{color:var(--gray);font-size:.92rem;line-height:1.65;max-width:550px}
+.svc-count{display:inline-block;background:rgba(13,208,208,.1);color:var(--teal2);font-size:.74rem;font-weight:700;padding:2px 10px;border-radius:100px;margin-left:.6rem;vertical-align:middle}
+
+/* ── SUBSECTION CARDS ── */
+.sub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;margin-bottom:1.5rem}
+
+.sub-card{
+  background:var(--white);
+  border:1.5px solid #e2e8f0;
+  border-radius:16px;
+  padding:1.4rem;
+  cursor:pointer;
+  transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.svc-sec:nth-child(even) .sub-card{background:var(--white)}
+.sub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--teal),var(--teal3));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.sub-card:hover{border-color:rgba(13,208,208,.4);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.09)}
+.sub-card:hover::before{transform:scaleX(1)}
+.sub-card-icon{font-size:1.5rem;margin-bottom:.6rem}
+.sub-card-title{font-weight:700;font-size:.92rem;color:#060d1a;margin-bottom:.3rem}
+.sub-card-count{display:inline-block;background:var(--mist);color:var(--gray);font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:100px}
+
+/* ── TAGS PANEL (collapsible) ── */
+.tags-panel{background:var(--mist);border-radius:14px;padding:1.4rem;display:none;margin-top:-0.4rem;border:1.5px solid #e2e8f0}
+.tags-panel.open{display:block}
+.tags-panel-title{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:.9rem}
+.tags-wrap{display:flex;flex-wrap:wrap;gap:.4rem}
+.stag{background:var(--white);border:1px solid #e2e8f0;color:#334155;border-radius:7px;padding:4px 12px;font-size:.8rem;transition:all .15s;cursor:default}
+.stag:hover{border-color:var(--teal);color:var(--teal2)}
+
+/* ── OTHER SERVICES BIG CARDS ── */
+.other-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem}
+.other-card{
+  border-radius:18px;padding:2rem 1.5rem;
+  text-align:center;
+  border:1.5px solid #e2e8f0;
+  background:var(--white);
+  transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.other-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,208,208,.06),transparent);opacity:0;transition:opacity .25s}
+.other-card:hover{border-color:rgba(13,208,208,.4);transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+.other-card:hover::after{opacity:1}
+.oc-icon{font-size:2.6rem;margin-bottom:.9rem;display:block}
+.oc-title{font-weight:700;font-size:1rem;color:#060d1a;margin-bottom:.4rem}
+.oc-desc{color:var(--gray);font-size:.82rem;line-height:1.55}
+
+/* ── CTA BAND ── */
+.cta-band{background:#060d1a;padding:clamp(2.5rem,5vw,4rem) 0}
+.cta-band-inner{max-width:700px;margin:0 auto;text-align:center;padding:0 1.5rem}
+.cta-band h2{font-family:'Playfair Display',serif;color:var(--white);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:.75rem}
+.cta-band p{color:rgba(255,255,255,.5);margin-bottom:2rem;font-size:.97rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-w{display:inline-flex;align-items:center;gap:.5rem;background:var(--white);color:var(--teal2);font-weight:700;padding:.85rem 1.8rem;border-radius:10px;font-size:.95rem;text-decoration:none;transition:all .2s}
+.btn-w:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,255,255,.2)}
+.btn-wa2{display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:white;font-weight:700;padding:.85rem 1.8rem;border-radius:10px;font-size:.95rem;text-decoration:none;transition:all .2s;box-shadow:0 4px 16px rgba(37,211,102,.3)}
+.btn-wa2:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(37,211,102,.45)}
+
+/* ── ANIMATIONS ── */
+.fi{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.fi.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+</style>
+</head>
+<body>
+<div id="header-root"></div>
+
+<!-- ══ HERO ══ -->
+<div class="svc-hero">
+  <div class="svc-hero-inner">
+    <div class="sh-eyebrow"><span class="ep"></span>Centro de Diagnóstico CONRAD</div>
+    <h1 class="sh-title">Servicios de Diagnóstico</h1>
+    <p class="sh-sub">Tecnología de última generación para un diagnóstico preciso. Descubre todos nuestros estudios disponibles.</p>
+    <nav class="svc-nav">
+      <a href="#rayos-x"   class="svc-pill">🩻 Rayos X</a>
+      <a href="#ultrasonido" class="svc-pill">🔊 Ultrasonidos</a>
+      <a href="#tomografia" class="svc-pill">💠 Tomografías</a>
+      <a href="#laboratorio" class="svc-pill">🔬 Laboratorio</a>
+      <a href="#mamografia" class="svc-pill">🎗️ Mamografía</a>
+      <a href="#ecg"        class="svc-pill">❤️ ECG</a>
+      <a href="#pap"        class="svc-pill">🩺 Papanicolau</a>
+      <a href="#pulmones"   class="svc-pill">🫁 Pulmones</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     RAYOS X
+══════════════════════════ -->
+<section class="svc-sec" id="rayos-x">
+  <div class="svc-sec-inner">
+    <div class="svc-sec-header fi">
+      <div class="svc-sec-badge badge-blue">🩻</div>
+      <div class="svc-sec-text">
+        <h2>Rayos X <span class="svc-count">7 categorías</span></h2>
+        <p>Estudios radiológicos de alta resolución para diagnóstico preciso en todas las regiones del cuerpo. Toca cada categoría para ver los estudios disponibles.</p>
+      </div>
+    </div>
+
+    <div class="sub-grid fi d1" id="rx-grid"></div>
+    <div class="tags-panel" id="rx-panel">
+      <div class="tags-panel-title" id="rx-panel-title">Estudios disponibles</div>
+      <div class="tags-wrap" id="rx-tags"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     ULTRASONIDOS
+══════════════════════════ -->
+<section class="svc-sec" id="ultrasonido">
+  <div class="svc-sec-inner">
+    <div class="svc-sec-header fi">
+      <div class="svc-sec-badge badge-teal">🔊</div>
+      <div class="svc-sec-text">
+        <h2>Ultrasonidos <span class="svc-count">4 categorías</span></h2>
+        <p>Diagnóstico por imagen en tiempo real. Desde estudios obstétricos 5D hasta Doppler vascular especializado.</p>
+      </div>
+    </div>
+    <div class="sub-grid fi d1" id="us-grid"></div>
+    <div class="tags-panel" id="us-panel">
+      <div class="tags-panel-title" id="us-panel-title">Estudios disponibles</div>
+      <div class="tags-wrap" id="us-tags"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     TOMOGRAFÍAS
+══════════════════════════ -->
+<section class="svc-sec" id="tomografia">
+  <div class="svc-sec-inner">
+    <div class="svc-sec-header fi">
+      <div class="svc-sec-badge badge-purple">💠</div>
+      <div class="svc-sec-text">
+        <h2>Tomografías <span class="svc-count">+30 estudios</span></h2>
+        <p>Tomógrafo computarizado de alta definición. Diagnósticos complejos de cuerpo completo con reconstrucciones 3D.</p>
+      </div>
+    </div>
+    <div class="fi d1">
+      <div class="tags-wrap" id="tac-tags" style="gap:.45rem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     OTROS SERVICIOS
+══════════════════════════ -->
+<section class="svc-sec" id="laboratorio">
+  <div class="svc-sec-inner">
+    <div class="svc-sec-header fi">
+      <div class="svc-sec-badge badge-green">🔬</div>
+      <div class="svc-sec-text">
+        <h2>Servicios Complementarios</h2>
+        <p>Laboratorio clínico, mamografía digital, electrocardiograma, Papanicolau y más para un diagnóstico integral.</p>
+      </div>
+    </div>
+    <div class="other-grid fi d1">
+      <div class="other-card" id="laboratorio-card">
+        <span class="oc-icon">🔬</span>
+        <div class="oc-title">Laboratorio Clínico</div>
+        <div class="oc-desc">Análisis completos con resultados rápidos y precisos. Hematología, bioquímica, microbiología y más.</div>
+      </div>
+      <div class="other-card" id="mamografia">
+        <span class="oc-icon">🎗️</span>
+        <div class="oc-title">Mamografía Digital</div>
+        <div class="oc-desc">Diagnóstico mamario de alta resolución para detección temprana. Tecnología digital de última generación.</div>
+      </div>
+      <div class="other-card" id="ecg">
+        <span class="oc-icon">❤️</span>
+        <div class="oc-title">Electrocardiograma</div>
+        <div class="oc-desc">Registro de la actividad eléctrica cardíaca. Diagnóstico rápido para evaluación cardiovascular.</div>
+      </div>
+      <div class="other-card" id="pap">
+        <span class="oc-icon">🩺</span>
+        <div class="oc-title">Papanicolau</div>
+        <div class="oc-desc">Prueba citológica cervical para detección y prevención de patologías. Manejo confidencial y profesional.</div>
+      </div>
+      <div class="other-card" id="pulmones">
+        <span class="oc-icon">🫁</span>
+        <div class="oc-title">Tarjeta de Pulmones</div>
+        <div class="oc-desc">Evaluación radiológica pulmonar para certificados laborales, IGSS, empresas y seguimiento médico.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <h2>¿Necesitas alguno de estos estudios?</h2>
+    <p>Llama o escríbenos para agendar tu cita. Atención rápida y resultados confiables.</p>
+    <div class="cta-btns">
+      <a href="tel:77252722" class="btn-w">📞 7725-2722</a>
+      <a href="https://wa.me/50254605569?text=Hola%20CONRAD%2C%20quisiera%20agendar%20un%20estudio" target="_blank" class="btn-wa2">💬 WhatsApp 5460-5569</a>
+    </div>
+  </div>
+</div>
+
+<div id="footer-root"></div>
+<div id="chatbot-root"></div>
+<script src="../js/components.js"></script>
+<script>
+  document.getElementById('header-root').innerHTML = renderNavbar('servicios', false);
+  document.getElementById('footer-root').innerHTML = renderFooter(false);
+  document.getElementById('chatbot-root').innerHTML = renderChatbot();
+
+  // ─── DATA ───
+  const RX = [
+    { icon:'🧠', title:'Cabeza y Cuello', items:['Cráneo','Watters','Mastoides Bilaterales','Huesos Propios de la Nariz','Art. Temporomandibular','Silla Turca','Senos Paranasales','Arcos Cigomáticos','Órbitas','Maxilar Superior/Inferior','Nasofaringe'] },
+    { icon:'🫁', title:'Tórax',            items:['Tórax PA','Tórax PA y Lateral','Tórax Apicolordótico','Escápula / Clavícula','Esternón','Parrilla Costal Izquierda','Parrilla Costal Derecha'] },
+    { icon:'🦴', title:'Columna',          items:['Columna Completa','Columna Cervical','Columna Dorsal','Columna Lumbar','Columna Lumbosacra','Columna Sacrocoxígea','Coxis','Columna Dinámica','Columna Oblicua'] },
+    { icon:'🫀', title:'Abdomen y Pelvis', items:['Abdomen Simple','Abdomen Sentado','Pelvis AP','Pelvis AP y Rana','Cadera Bilateral AP y Axial','Cadera Unilateral AP y Axial'] },
+    { icon:'💪', title:'Extremidades Superiores', items:['Hombro AP y Axial','Antebrazo Radio-Cúbito','Codo','Muñeca','Húmero','Mano AP, Lateral y Oblicua','Mano (Edad Ósea)','Serie Ósea Metastásica','Dedos AP y Oblicuo'] },
+    { icon:'🦵', title:'Extremidades Inferiores',  items:['Fémur','Rodilla','Rodillas Comparativas','Pierna','Tobillo','Peroné','Pie AP y Oblicuo','Pie AP y Lateral','Calcáneo','Rodilla Sol Naciente'] },
+    { icon:'⚗️', title:'Estudios Especiales',      items:['Trago de Bario','Esofagograma','Series Gastroduodenal','Serie Gastrointestinal','Enema de Bario','Colostograma','Pielograma IV','Uretrocistograma Miccional','Uretrocistograma de Choque','Cistograma','Colangiograma por Sonda','Fistulograma','Histerosalpingograma'] },
+  ];
+
+  const US = [
+    { icon:'🫀', title:'Abdomen', items:['Abdomen Completo','Abdomen para Colecciones','Abdomen Superior'] },
+    { icon:'📍', title:'1 Región', items:['Hígado y Vías Biliares','Renal y Vías Urinarias','Pélvico Suprapúbico','Pélvico Endovaginal','Prostático','Fosa Ilíaca Derecha','Prueba de Boyden','Obstétrico','Perfil Biofísico','Mamario','Testicular','Tiroides','Tejidos Blandos','Inguinal'] },
+    { icon:'⭐', title:'Especiales', items:['Fetal Estructural','Musculoesquelético','Transfontanelar','Pilórico','5D Obstétrico'] },
+    { icon:'🩸', title:'Doppler', items:['Doppler Placentario','Doppler Fetal','Doppler Obstétrico','Doppler Portal/Renal/Carotídeo','Doppler Musculoesquelético','Doppler Venoso','Doppler Arterial'] },
+  ];
+
+  const TAC = ['Cerebral','Tórax Alta Definición Pulmonar','Abdominal Superior','Abdominal Inferior (Pélvico)','Abdominal Completa','Cervical','Dorsal','Cuello','Senos Paranasales','Órbitas','Facial','Facial con Reconstrucción','Petroso (Oído)','Silla Turca (Hipófisis) con Medio','Tiroideo','Calcáneo / Pie','Lumbar / Lumbosacra','UroTAC','PieloTAC','AngioHepático / Trifásica','Mastoides','TC Hombro','TC Codo','TC Muñeca','TC Rodilla','TC Tobillo','TC Fémur/Pie/Mano','TC Ambas Caderas','Escanograma Miembro Inferior','TAC Pulmonar Alta Resolución (TACAR)'];
+
+  // ─── RENDER RX ───
+  let rxActive = null;
+  const rxGrid = document.getElementById('rx-grid');
+  rxGrid.innerHTML = RX.map((cat, i) => `
+    <div class="sub-card" onclick="togglePanel('rx',${i})" data-idx="${i}">
+      <div class="sub-card-icon">${cat.icon}</div>
+      <div class="sub-card-title">${cat.title}</div>
+      <div class="sub-card-count">${cat.items.length} estudios</div>
+    </div>`).join('');
+
+  function togglePanel(prefix, idx) {
+    const panel = document.getElementById(prefix+'-panel');
+    const tagsEl = document.getElementById(prefix+'-tags');
+    const titleEl = document.getElementById(prefix+'-panel-title');
+    const cards = document.querySelectorAll('#'+prefix+'-grid .sub-card');
+    const data = prefix==='rx' ? RX : US;
+    const cat = data[idx];
+
+    if (panel.dataset.open === String(idx)) {
+      panel.classList.remove('open');
+      panel.dataset.open = '';
+      cards.forEach(c => c.style.borderColor='');
+      return;
+    }
+    panel.dataset.open = idx;
+    titleEl.textContent = cat.icon + ' ' + cat.title + ' — ' + cat.items.length + ' estudios';
+    tagsEl.innerHTML = cat.items.map(t => `<span class="stag">${t}</span>`).join('');
+    panel.classList.add('open');
+    cards.forEach(c => c.style.borderColor='');
+    cards[idx].style.borderColor='rgba(13,208,208,.45)';
+
+    // Scroll to panel
+    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+  }
+
+  // ─── RENDER US ───
+  const usGrid = document.getElementById('us-grid');
+  usGrid.innerHTML = US.map((cat, i) => `
+    <div class="sub-card" onclick="togglePanel('us',${i})" data-idx="${i}">
+      <div class="sub-card-icon">${cat.icon}</div>
+      <div class="sub-card-title">${cat.title}</div>
+      <div class="sub-card-count">${cat.items.length} estudios</div>
+    </div>`).join('');
+
+  // ─── RENDER TAC ───
+  document.getElementById('tac-tags').innerHTML = TAC.map(t => `
+    <span class="stag" style="font-size:.82rem;padding:5px 13px;border-radius:9px;cursor:default;background:var(--mist);">💠 ${t}</span>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Médico – CONRAD Diagnóstico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* ══ RESET & BASE ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#f0f4ff;color:#1e293b;overflow-x:hidden;min-height:100vh}
+
+/* ══ VARIABLES ══ */
+:root{
+  --teal:#00c4b4;--teal2:#00a89a;--teal3:#e0faf8;
+  --violet:#7c3aed;--violet2:#6d28d9;--violet3:#ede9fe;
+  --coral:#f97316;--coral2:#ea6c09;--coral3:#fff0e6;
+  --gold:#f59e0b;--gold3:#fffbeb;
+  --green:#10b981;--green3:#ecfdf5;
+  --navy:#1e293b;--gray:#64748b;--light:#f8fafc;
+  --white:#ffffff;
+  --shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 48px rgba(0,0,0,.14);
+}
+
+/* ══ LOGIN PAGE ══ */
+.login-page{
+  min-height:100vh;
+  background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 35%,#0d4c4a 70%,#065f46 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;position:relative;overflow:hidden;
+}
+.login-page::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 50%,rgba(124,58,237,.25),transparent 50%),
+             radial-gradient(ellipse at 80% 20%,rgba(0,196,180,.2),transparent 50%),
+             radial-gradient(ellipse at 60% 80%,rgba(249,115,22,.15),transparent 40%);
+}
+/* Animated particles */
+.particle{position:absolute;border-radius:50%;pointer-events:none;animation:floatP 6s ease-in-out infinite}
+.p1{width:300px;height:300px;background:rgba(0,196,180,.08);top:-100px;right:-50px;animation-delay:0s}
+.p2{width:200px;height:200px;background:rgba(124,58,237,.1);bottom:-50px;left:-30px;animation-delay:-2s}
+.p3{width:150px;height:150px;background:rgba(249,115,22,.08);top:40%;right:10%;animation-delay:-4s}
+@keyframes floatP{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-20px) scale(1.05)}}
+
+.login-card{
+  position:relative;z-index:1;
+  width:100%;max-width:460px;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:28px;
+  padding:clamp(2rem,5vw,3rem);
+  box-shadow:0 32px 80px rgba(0,0,0,.4);
+}
+.login-logo{
+  display:flex;align-items:center;justify-content:center;gap:.75rem;
+  margin-bottom:2.5rem;
+}
+.login-logo-icon{
+  width:52px;height:52px;
+  background:linear-gradient(135deg,#00c4b4,#7c3aed);
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;
+  box-shadow:0 8px 24px rgba(0,196,180,.4);
+}
+.login-logo-text{
+  font-size:1.6rem;font-weight:800;color:#fff;
+  letter-spacing:-.03em;
+}
+.login-logo-text span{color:#00c4b4}
+.login-title{
+  font-size:1.7rem;font-weight:800;color:#fff;
+  letter-spacing:-.03em;text-align:center;margin-bottom:.5rem;
+}
+.login-sub{color:rgba(255,255,255,.55);font-size:.9rem;text-align:center;margin-bottom:2rem;line-height:1.6}
+
+.login-label{display:block;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem}
+.login-input{
+  width:100%;padding:1rem 1.2rem;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.15);
+  border-radius:14px;color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1rem;font-weight:600;
+  letter-spacing:.08em;text-align:center;text-transform:uppercase;
+  outline:none;transition:all .2s;margin-bottom:1.2rem;
+}
+.login-input::placeholder{color:rgba(255,255,255,.25);font-weight:400;letter-spacing:.02em;text-transform:none}
+.login-input:focus{border-color:var(--teal);background:rgba(0,196,180,.1);box-shadow:0 0 0 4px rgba(0,196,180,.15)}
+.login-btn{
+  width:100%;padding:1rem;
+  background:linear-gradient(135deg,#00c4b4,#7c3aed);
+  color:#fff;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1rem;font-weight:800;
+  border:none;border-radius:14px;cursor:pointer;
+  transition:all .2s;
+  box-shadow:0 6px 24px rgba(0,196,180,.35);
+  letter-spacing:.01em;
+}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,196,180,.45)}
+.login-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.login-err{
+  background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);
+  color:#fca5a5;font-size:.85rem;padding:.75rem 1rem;
+  border-radius:10px;margin-top:.75rem;text-align:center;display:none;
+}
+.login-help{color:rgba(255,255,255,.25);font-size:.78rem;text-align:center;margin-top:1.5rem}
+.login-help a{color:var(--teal)}
+.spin-sm{width:20px;height:20px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ══ DASHBOARD ══ */
+#dashboard{display:none}
+.dash-nav{
+  background:linear-gradient(135deg,#0f172a,#1e1b4b);
+  padding:.85rem clamp(1rem,4vw,2.5rem);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.3);
+}
+.nav-brand{display:flex;align-items:center;gap:.6rem}
+.nav-brand-icon{width:36px;height:36px;background:linear-gradient(135deg,#00c4b4,#7c3aed);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.nav-brand-name{font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.nav-brand-name span{color:#00c4b4}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.nav-user{
+  display:flex;align-items:center;gap:.6rem;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  border-radius:100px;padding:.35rem .85rem .35rem .45rem;
+}
+.nav-avatar{width:28px;height:28px;background:linear-gradient(135deg,#00c4b4,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.nav-username{color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-logout{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:.78rem;font-weight:600;padding:.4rem .8rem;border-radius:8px;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.nav-logout:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:#fca5a5}
+
+.dash-body{max-width:1100px;margin:0 auto;padding:2rem clamp(1rem,4vw,2.5rem)}
+
+/* Doctor header card */
+.doc-header{
+  background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0d4c4a 100%);
+  border-radius:24px;padding:1.8rem 2rem;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+.doc-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(0,196,180,.15),transparent 55%)}
+.doc-avatar{
+  width:64px;height:64px;flex-shrink:0;
+  background:linear-gradient(135deg,#00c4b4,#7c3aed);
+  border-radius:20px;display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;
+  box-shadow:0 8px 24px rgba(0,196,180,.35);
+}
+.doc-name{font-size:1.3rem;font-weight:800;color:#fff;letter-spacing:-.02em;position:relative;z-index:1}
+.doc-meta{color:rgba(255,255,255,.5);font-size:.83rem;margin-top:.2rem;position:relative;z-index:1}
+.doc-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(0,196,180,.15);border:1px solid rgba(0,196,180,.3);
+  color:#00c4b4;font-size:.7rem;font-weight:800;
+  padding:3px 10px;border-radius:100px;margin-left:.5rem;
+  letter-spacing:.05em;text-transform:uppercase;
+}
+.doc-badge::before{content:'●';font-size:.5rem}
+.doc-clinica{color:rgba(255,255,255,.35);font-size:.78rem;margin-top:.2rem;position:relative;z-index:1}
+
+/* Tabs */
+.tabs{display:flex;gap:.4rem;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.6rem 1.2rem;border-radius:12px;
+  border:1.5px solid #e2e8f0;background:#fff;
+  color:#64748b;font-size:.85rem;font-weight:700;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.tab:hover{border-color:#00c4b4;color:#00a89a}
+.tab.active{
+  background:linear-gradient(135deg,#00c4b4,#00a89a);
+  border-color:transparent;color:#fff;
+  box-shadow:0 4px 16px rgba(0,196,180,.35);
+}
+.tab-icon{font-size:1rem}
+.pane{display:none}.pane.active{display:block}
+
+/* Stat tiles */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
+.stat-tile{
+  background:#fff;border-radius:20px;padding:1.4rem;
+  border:1.5px solid #f1f5f9;
+  box-shadow:var(--shadow);
+  position:relative;overflow:hidden;
+  transition:all .2s;
+}
+.stat-tile:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.stat-tile::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  opacity:.6;
+}
+.st-teal::after{background:linear-gradient(to right,#00c4b4,transparent)}
+.st-violet::after{background:linear-gradient(to right,#7c3aed,transparent)}
+.st-coral::after{background:linear-gradient(to right,#f97316,transparent)}
+.st-gold::after{background:linear-gradient(to right,#f59e0b,transparent)}
+.st-icon{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:.8rem;
+}
+.st-teal .st-icon{background:var(--teal3)}
+.st-violet .st-icon{background:var(--violet3)}
+.st-coral .st-icon{background:var(--coral3)}
+.st-gold .st-icon{background:var(--gold3)}
+.st-num{
+  font-size:2rem;font-weight:800;letter-spacing:-.03em;line-height:1;
+}
+.st-teal .st-num{color:#00a89a}
+.st-violet .st-num{color:#7c3aed}
+.st-coral .st-num{color:#f97316}
+.st-gold .st-num{color:#f59e0b}
+.st-label{font-size:.73rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem}
+
+/* Cards */
+.card{background:#fff;border-radius:20px;padding:1.5rem;box-shadow:var(--shadow);border:1.5px solid #f1f5f9;margin-bottom:1rem}
+.card-title{font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:1.1rem}
+
+/* Charts row */
+.charts-row{display:grid;grid-template-columns:1.5fr 1fr;gap:1rem;margin-bottom:1rem}
+@media(max-width:700px){.charts-row{grid-template-columns:1fr}}
+
+/* Patients table */
+.search-bar{
+  display:flex;align-items:center;gap:.5rem;
+  background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;
+  padding:.5rem .9rem;margin-bottom:1rem;
+}
+.search-bar input{border:none;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;color:#1e293b;outline:none;flex:1;min-width:0}
+.search-bar input::placeholder{color:#94a3b8}
+.pt{width:100%;border-collapse:collapse;font-size:.85rem}
+.pt th{text-align:left;padding:.65rem .9rem;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;border-bottom:1.5px solid #f1f5f9}
+.pt td{padding:.85rem .9rem;border-bottom:1px solid #f8fafc;color:#334155;vertical-align:middle}
+.pt tr:last-child td{border-bottom:none}
+.pt tr:hover td{background:#f8fafc}
+.pt-name{font-weight:700;color:#1e293b}
+.pt-service{color:#64748b;font-size:.82rem}
+.badge-com{
+  display:inline-block;
+  padding:3px 10px;border-radius:100px;
+  font-size:.78rem;font-weight:800;
+}
+.badge-com.has-com{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0}
+.badge-com.no-com{background:#f1f5f9;color:#94a3b8;border:1px solid #e2e8f0}
+
+/* Comisiones cards */
+.com-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.com-card{
+  background:#fff;border-radius:20px;padding:1.5rem;
+  box-shadow:var(--shadow);border:1.5px solid #f1f5f9;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.com-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.com-card-top{
+  position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(to right,#00c4b4,#7c3aed);
+}
+.com-periodo{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:.5rem}
+.com-monto{
+  font-size:2.2rem;font-weight:800;letter-spacing:-.04em;
+  background:linear-gradient(135deg,#00a89a,#7c3aed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.com-detail{color:#64748b;font-size:.83rem;margin-top:.4rem}
+.com-status{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:.75rem;padding:4px 12px;border-radius:100px;
+  font-size:.74rem;font-weight:800;
+}
+.com-status.pagado{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0}
+.com-status.pendiente{background:#fffbeb;color:#d97706;border:1px solid #fde68a}
+.com-status.pagado::before{content:'✓ '}
+.com-status.pendiente::before{content:'⏳ '}
+
+/* Notes / Mensajes */
+.msg-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.2rem;max-height:340px;overflow-y:auto}
+.msg-bubble{
+  padding:.9rem 1.1rem;border-radius:14px;
+  max-width:88%;font-size:.87rem;line-height:1.6;
+}
+.msg-from-me{
+  background:linear-gradient(135deg,#00c4b4,#00a89a);
+  color:#fff;align-self:flex-end;
+  border-bottom-right-radius:4px;
+}
+.msg-from-team{
+  background:#f1f5f9;color:#334155;
+  align-self:flex-start;
+  border-bottom-left-radius:4px;
+}
+.msg-time{font-size:.68rem;opacity:.6;margin-top:.2rem}
+.msg-compose{
+  display:flex;gap:.6rem;align-items:flex-end;
+  border-top:1.5px solid #f1f5f9;padding-top:1rem;
+}
+.msg-input{
+  flex:1;padding:.8rem 1rem;
+  background:#f8fafc;border:1.5px solid #e2e8f0;
+  border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.87rem;color:#1e293b;outline:none;resize:none;
+  transition:border-color .2s;min-height:70px;
+}
+.msg-input:focus{border-color:#00c4b4}
+.msg-send{
+  padding:.8rem 1.2rem;
+  background:linear-gradient(135deg,#00c4b4,#00a89a);
+  color:#fff;border:none;border-radius:12px;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.87rem;
+  transition:all .2s;white-space:nowrap;
+  box-shadow:0 4px 12px rgba(0,196,180,.3);
+}
+.msg-send:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,196,180,.4)}
+.msg-send:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* Empty */
+.empty{text-align:center;padding:2.5rem 1rem;color:#94a3b8}
+.empty-icon{font-size:2.5rem;margin-bottom:.6rem}
+.empty p{font-size:.87rem}
+
+/* Responsive */
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .com-grid{grid-template-columns:1fr}
+  .doc-header{flex-direction:column;align-items:flex-start}
+  .tabs{gap:.3rem}
+  .tab{padding:.5rem .9rem;font-size:.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div id="loginPage" class="login-page">
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">💠</div>
+      <div class="login-logo-text">CON<span>RAD</span></div>
+    </div>
+    <h1 class="login-title">Portal Médico</h1>
+    <p class="login-sub">Ingresa tu código de acceso único para ver tus pacientes referidos, comisiones y más.</p>
+    <label class="login-label">Código de acceso</label>
+    <input id="codeInput" class="login-input" type="text" placeholder="Ej: CR-DRCOLAJ-001"
+           maxlength="20" autocomplete="off" spellcheck="false"
+           oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9-]/g,'')">
+    <button class="login-btn" id="loginBtn" onclick="doLogin()">Acceder →</button>
+    <div class="login-err" id="loginErr"></div>
+    <div id="loginSpinner" style="display:none;text-align:center;margin-top:1rem">
+      <span class="spin-sm"></span><span style="color:rgba(255,255,255,.5);font-size:.85rem">Verificando...</span>
+    </div>
+    <p class="login-help">¿No tienes código? <a href="https://wa.me/50231109147" target="_blank">Contáctanos →</a></p>
+  </div>
+</div>
+
+<!-- ══════════ DASHBOARD ══════════ -->
+<div id="dashboard">
+  <!-- Nav -->
+  <nav class="dash-nav">
+    <div class="nav-brand">
+      <div class="nav-brand-icon">💠</div>
+      <div class="nav-brand-name">CON<span>RAD</span></div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-user">
+        <div class="nav-avatar">👨‍⚕️</div>
+        <span class="nav-username" id="navName">—</span>
+      </div>
+      <button class="nav-logout" onclick="cerrarSesion()">Salir</button>
+    </div>
+  </nav>
+
+  <div class="dash-body">
+    <!-- Doctor header -->
+    <div class="doc-header">
+      <div class="doc-avatar">👨‍⚕️</div>
+      <div style="position:relative;z-index:1;flex:1;min-width:0">
+        <div class="doc-name" id="docName">—<span class="doc-badge">Activo</span></div>
+        <div class="doc-meta" id="docEsp">—</div>
+        <div class="doc-clinica" id="docClinica"></div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" id="tabs">
+      <button class="tab active" onclick="switchTab('resumen')"><span class="tab-icon">📊</span>Resumen</button>
+      <button class="tab" onclick="switchTab('pacientes')"><span class="tab-icon">🧑‍🤝‍🧑</span>Mis Pacientes</button>
+      <button class="tab" onclick="switchTab('comisiones')"><span class="tab-icon">💰</span>Comisiones</button>
+      <button class="tab" onclick="switchTab('mensajes')"><span class="tab-icon">💬</span>Mensajes</button>
+    </div>
+
+    <!-- TAB RESUMEN -->
+    <div id="pane-resumen" class="pane active">
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-tile st-teal"><div class="st-icon">🧑‍🤝‍🧑</div><div class="st-num" id="s-pac">—</div><div class="st-label">Pacientes Referidos</div></div>
+        <div class="stat-tile st-violet"><div class="st-icon">🩻</div><div class="st-num" id="s-est">—</div><div class="st-label">Estudios Realizados</div></div>
+        <div class="stat-tile st-coral"><div class="st-icon">💰</div><div class="st-num" id="s-com">—</div><div class="st-label">Comisión Total</div></div>
+        <div class="stat-tile st-gold"><div class="st-icon">⏳</div><div class="st-num" id="s-pen">—</div><div class="st-label">Pendiente de Pago</div></div>
+      </div>
+      <div class="charts-row">
+        <div class="card"><div class="card-title">📈 Pacientes por mes — 2026</div><canvas id="chartBar" height="130"></canvas></div>
+        <div class="card"><div class="card-title">🏆 Comisiones por período</div><canvas id="chartDough" height="130"></canvas></div>
+      </div>
+    </div>
+
+    <!-- TAB PACIENTES -->
+    <div id="pane-pacientes" class="pane">
+      <div class="card" style="padding:1.2rem 1.5rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">
+          <div class="card-title" style="margin-bottom:0">Historial de pacientes referidos</div>
+          <div class="search-bar" style="margin-bottom:0;min-width:220px">
+            <span style="color:#94a3b8;font-size:.9rem">🔍</span>
+            <input id="searchPac" placeholder="Buscar..." oninput="filtrarPacs()">
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="pt">
+            <thead><tr><th>#</th><th>Paciente</th><th>Servicio</th><th>Fecha</th><th>Comisión</th></tr></thead>
+            <tbody id="tbPac"></tbody>
+          </table>
+        </div>
+        <div id="emPac" class="empty" style="display:none"><div class="empty-icon">📋</div><p>Sin pacientes registrados aún.</p></div>
+      </div>
+    </div>
+
+    <!-- TAB COMISIONES -->
+    <div id="pane-comisiones" class="pane">
+      <div class="com-grid" id="comGrid"></div>
+      <div id="emCom" class="empty" style="display:none"><div class="empty-icon">💰</div><p>Sin comisiones registradas aún.</p></div>
+    </div>
+
+    <!-- TAB MENSAJES -->
+    <div id="pane-mensajes" class="pane">
+      <div class="card">
+        <div class="card-title">Mensajes con el equipo CONRAD</div>
+        <div class="msg-list" id="msgList"></div>
+        <div class="msg-compose">
+          <textarea id="msgInput" class="msg-input" placeholder="Escribe tu mensaje para la visitadora médica..."></textarea>
+          <button class="msg-send" id="msgSendBtn" onclick="enviarMensaje()">Enviar 📤</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dash-body -->
+</div><!-- /dashboard -->
+
+<script>
+const SUPA = 'https://nxriabmtucfacbtjreuh.supabase.co';
+// Supabase anon key — segura en frontend con RLS activado
+const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54cmlhYm10dWNmYWNidGpyZXVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwNzg1NzAsImV4cCI6MjA4NDY1NDU3MH0.VFSVmLzTqGd7SAFKk5fL4rilCgiSYLHFmPNNHBqDapQ';
+const H = { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON, 'Content-Type': 'application/json' };
+
+let medicoId = null, allPacs = [], cBar = null, cDough = null;
+
+async function q(path) {
+  const r = await fetch(SUPA + '/rest/v1/' + path, { headers: H });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function post(path, body) {
+  const r = await fetch(SUPA + '/rest/v1/' + path, { method: 'POST', headers: { ...H, 'Prefer': 'return=representation' }, body: JSON.stringify(body) });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
+// ── LOGIN ──
+async function doLogin() {
+  const code = document.getElementById('codeInput').value.trim().toUpperCase();
+  if (!code) { showErr('Ingresa tu código de acceso.'); return; }
+  setLoading(true); hideErr();
+  try {
+    const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(code);
+    let acc = isUUID
+      ? await q('portal_medicos_acceso?medico_id=eq.' + code + '&activo=eq.true&limit=1')
+      : await q('portal_medicos_acceso?codigo_acceso=eq.' + code + '&activo=eq.true&limit=1');
+    if (!acc.length) throw new Error('Código no encontrado. Verifica o contacta a CONRAD al 7725-2722.');
+    medicoId = acc[0].medico_id;
+    await cargarDashboard();
+  } catch(e) { showErr(e.message); }
+  finally { setLoading(false); }
+}
+
+async function cargarDashboard() {
+  // Médico
+  const [medico] = await q('medicos?id=eq.' + medicoId + '&limit=1');
+  document.getElementById('docName').innerHTML = medico.nombre + '<span class="doc-badge">Activo</span>';
+  document.getElementById('docEsp').textContent = medico.especialidad || 'Médico Referente CONRAD';
+  document.getElementById('docClinica').textContent = medico.clinica ? '📍 ' + medico.clinica : '';
+  document.getElementById('navName').textContent = medico.nombre;
+
+  // Pacientes visibles
+  const visibles = await q('portal_pacientes_visibles?medico_id=eq.' + medicoId + '&select=consulta_id');
+  const cids = visibles.map(v => v.consulta_id);
+  let pacs = [];
+  if (cids.length) {
+    const consultas = await q('consultas?id=in.(' + cids.join(',') + ')&anulado=eq.false&select=id,paciente_id,fecha');
+    const pacIds = [...new Set(consultas.map(c => c.paciente_id))];
+    if (pacIds.length) {
+      const pacData = await q('pacientes?id=in.(' + pacIds.join(',') + ')&select=id,nombre,primer_nombre,primer_apellido');
+      const pacMap = Object.fromEntries(pacData.map(p => [p.id, p.nombre || ((p.primer_nombre||'') + ' ' + (p.primer_apellido||'')).trim()]));
+      pacs = consultas.map(c => ({ nombre: pacMap[c.paciente_id] || 'Paciente', fecha: c.fecha, consulta_id: c.id }));
+    }
+  }
+  allPacs = pacs;
+
+  // Comisiones desde comisiones_por_pagar (datos reales)
+  const comisiones = await q('comisiones_por_pagar?medico_id=eq.' + medicoId + '&order=periodo_inicio.desc');
+
+  // Stats
+  const totalCom = comisiones.reduce((s, c) => s + parseFloat(c.total_comision || 0), 0);
+  const pendiente = comisiones.filter(c => c.estado === 'pendiente').reduce((s, c) => s + parseFloat(c.total_comision || 0), 0);
+  document.getElementById('s-pac').textContent = pacs.length;
+  document.getElementById('s-est').textContent = pacs.length;
+  document.getElementById('s-com').textContent = 'Q' + totalCom.toFixed(0);
+  document.getElementById('s-pen').textContent = 'Q' + pendiente.toFixed(0);
+
+  renderPacs(pacs);
+  renderComisiones(comisiones);
+  renderCharts(pacs, comisiones);
+  await cargarMensajes();
+
+  // Show dashboard
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+}
+
+function renderPacs(pacs) {
+  const tb = document.getElementById('tbPac');
+  document.getElementById('emPac').style.display = pacs.length ? 'none' : 'block';
+  tb.innerHTML = pacs.map((p, i) => `
+    <tr>
+      <td style="color:#cbd5e1;font-size:.73rem">${String(i+1).padStart(2,'0')}</td>
+      <td class="pt-name">${p.nombre}</td>
+      <td class="pt-service">Estudio diagnóstico</td>
+      <td style="color:#64748b;font-size:.8rem">${p.fecha ? new Date(p.fecha+'T12:00:00').toLocaleDateString('es-GT') : '—'}</td>
+      <td><span class="badge-com no-com">—</span></td>
+    </tr>`).join('');
+}
+
+function filtrarPacs() {
+  const q2 = document.getElementById('searchPac').value.toLowerCase();
+  renderPacs(q2 ? allPacs.filter(p => p.nombre.toLowerCase().includes(q2)) : allPacs);
+}
+
+function renderComisiones(coms) {
+  const g = document.getElementById('comGrid');
+  document.getElementById('emCom').style.display = coms.length ? 'none' : 'block';
+  if (!coms.length) { g.innerHTML = ''; return; }
+  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  g.innerHTML = coms.map(c => {
+    const d = c.detalles_comisiones || {};
+    const detalles = Object.entries(d).map(([k,v]) => `${k}: Q${parseFloat(v).toFixed(2)}`).join(' · ');
+    const inicio = c.periodo_inicio ? new Date(c.periodo_inicio + 'T12:00:00') : null;
+    const periodo = inicio ? meses[inicio.getMonth()] + ' ' + inicio.getFullYear() : c.periodo_inicio || '—';
+    return `
+    <div class="com-card">
+      <div class="com-card-top"></div>
+      <div class="com-periodo">${periodo}</div>
+      <div class="com-monto">Q${parseFloat(c.total_comision||0).toFixed(2)}</div>
+      <div class="com-detail">${c.total_pacientes||0} paciente(s)${detalles ? ' · ' + detalles : ''}</div>
+      <span class="com-status ${c.estado === 'pagado' ? 'pagado' : 'pendiente'}">${c.estado === 'pagado' ? 'Pagado' : 'Pendiente'}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderCharts(pacs, coms) {
+  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const mc = new Array(12).fill(0);
+  pacs.forEach(p => { if (p.fecha) mc[new Date(p.fecha+'T12:00:00').getMonth()]++; });
+
+  if (cBar) cBar.destroy();
+  cBar = new Chart(document.getElementById('chartBar'), {
+    type: 'bar',
+    data: { labels: meses, datasets: [{ label: 'Pacientes', data: mc,
+      backgroundColor: 'rgba(0,196,180,.6)', borderRadius: 8, borderSkipped: false }] },
+    options: { responsive: true, plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: '#94a3b8' }, grid: { color: '#f1f5f9' } },
+                x: { ticks: { color: '#94a3b8' }, grid: { display: false } } } }
+  });
+
+  if (cDough) cDough.destroy();
+  if (coms.length) {
+    const mesesN = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const labels = coms.map(c => {
+      const d = c.periodo_inicio ? new Date(c.periodo_inicio+'T12:00:00') : null;
+      return d ? mesesN[d.getMonth()]+' '+d.getFullYear() : c.periodo_inicio||'—';
+    });
+    cDough = new Chart(document.getElementById('chartDough'), {
+      type: 'doughnut',
+      data: { labels, datasets: [{ data: coms.map(c => parseFloat(c.total_comision||0)),
+        backgroundColor: ['#00c4b4','#7c3aed','#f97316','#f59e0b','#10b981','#3b82f6'], borderWidth: 0 }] },
+      options: { responsive: true, plugins: { legend: { position: 'bottom',
+        labels: { color: '#64748b', font: { size: 11, family: 'Plus Jakarta Sans' }, padding: 12 } } } }
+    });
+  }
+}
+
+// ── MENSAJES ──
+async function cargarMensajes() {
+  const notas = await q('portal_notas_medico?medico_id=eq.' + medicoId + '&order=created_at.asc&limit=30');
+  const list = document.getElementById('msgList');
+  if (!notas.length) {
+    list.innerHTML = `<div class="empty"><div class="empty-icon">💬</div><p>No hay mensajes aún. ¡Escríbenos!</p></div>`;
+    return;
+  }
+  list.innerHTML = notas.map(n => {
+    const fromMe = n.nota && !n.nota.startsWith('[TEAM]');
+    const texto = fromMe ? n.nota : n.nota.replace('[TEAM] ','');
+    const fecha = new Date(n.created_at).toLocaleDateString('es-GT', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
+    return `<div style="display:flex;flex-direction:column;align-items:${fromMe ? 'flex-end':'flex-start'}">
+      <div class="msg-bubble ${fromMe ? 'msg-from-me':'msg-from-team'}">${texto}</div>
+      <div class="msg-time" style="text-align:${fromMe?'right':'left'};padding:0 .4rem">${fromMe?'Tú':'CONRAD'} · ${fecha}</div>
+    </div>`;
+  }).join('');
+  list.scrollTop = list.scrollHeight;
+}
+
+async function enviarMensaje() {
+  const txt = document.getElementById('msgInput').value.trim();
+  if (!txt) return;
+  document.getElementById('msgSendBtn').disabled = true;
+  try {
+    // consulta_id is required - we use a sentinel UUID for portal messages
+    // Run this SQL first: ALTER TABLE portal_notas_medico ALTER COLUMN consulta_id DROP NOT NULL;
+    await post('portal_notas_medico', { medico_id: medicoId, nota: txt });
+    document.getElementById('msgInput').value = '';
+    await cargarMensajes();
+  } catch(e) { alert('Error al enviar: ' + e.message); }
+  finally { document.getElementById('msgSendBtn').disabled = false; }
+}
+
+// ── TABS ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((b,i) => b.classList.toggle('active', ['resumen','pacientes','comisiones','mensajes'][i] === tab));
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('pane-' + tab).classList.add('active');
+}
+
+function cerrarSesion() {
+  medicoId = null; allPacs = [];
+  if(cBar){cBar.destroy();cBar=null;} if(cDough){cDough.destroy();cDough=null;}
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('codeInput').value = '';
+  switchTab('resumen');
+}
+
+function showErr(m){const e=document.getElementById('loginErr');e.textContent=m;e.style.display='block';}
+function hideErr(){document.getElementById('loginErr').style.display='none';}
+function setLoading(s){
+  document.getElementById('loginSpinner').style.display=s?'block':'none';
+  document.getElementById('loginBtn').disabled=s;
+  document.getElementById('loginBtn').textContent=s?'Verificando...':'Acceder →';
+}
+document.getElementById('codeInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+</script>
+</body>
+</html>

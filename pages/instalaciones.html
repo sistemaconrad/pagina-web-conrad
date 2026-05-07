@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalaciones – CONRAD Centro de Diagnóstico</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#f7fafc;color:#071828;overflow-x:hidden}
+
+.page-hero{
+  background:linear-gradient(160deg,#060d1a,#071828,#061c2a);
+  padding:calc(70px + 3rem) 0 3rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(13,208,208,.09) 1px,transparent 1px);background-size:32px 32px}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(13,208,208,.35),transparent)}
+.ph-inner{position:relative;z-index:1}
+.ph-crumb{display:flex;align-items:center;gap:.4rem;justify-content:center;font-size:.76rem;color:rgba(255,255,255,.35);margin-bottom:.75rem}
+.ph-crumb a{color:#0dcfcf}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:#fff;letter-spacing:-.025em;margin-bottom:.5rem}
+.ph-sub{color:rgba(255,255,255,.5);font-size:.95rem}
+
+/* Lightbox */
+#lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);align-items:center;justify-content:center;padding:1rem}
+#lb.open{display:flex}
+#lbImg{max-width:95vw;max-height:92vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.8)}
+#lbClose{position:fixed;top:1rem;right:1.5rem;background:rgba(13,208,208,.15);border:1px solid rgba(13,208,208,.35);color:#0dcfcf;width:42px;height:42px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#lbClose:hover{background:rgba(13,208,208,.3)}
+
+/* Main */
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem)}
+
+/* Category block */
+.cat-block{padding:clamp(2.5rem,5vw,4rem) 0}
+.cat-block:nth-child(odd){background:#fff}
+.cat-block:nth-child(even){background:#f0f5f8}
+
+.cat-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+.cat-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(10,168,170,.1);border:1px solid rgba(10,168,170,.25);
+  color:#088a8c;font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:5px 14px;border-radius:100px;white-space:nowrap;
+}
+.cat-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:800;color:#071828;letter-spacing:-.02em}
+
+/* Gallery grid */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.gal-item{
+  border-radius:14px;overflow:hidden;
+  aspect-ratio:16/10;cursor:zoom-in;
+  position:relative;background:#d0dde8;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+  transition:transform .25s,box-shadow .25s;
+  height:0;padding-bottom:62.5%;
+}
+.gal-item:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.15)}
+.gal-item img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gal-item:hover img{transform:scale(1.04)}
+.gal-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(6,14,26,.65) 0%,transparent 55%);
+  opacity:0;transition:opacity .3s;
+  display:flex;align-items:flex-end;padding:.9rem;
+}
+.gal-item:hover .gal-overlay{opacity:1}
+.gal-label{color:#fff;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:.4rem}
+.zoom-ic{font-size:.9rem;opacity:.7}
+
+/* Fade in */
+.fi{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.fi.visible{opacity:1;transform:none}
+.fi.d1{transition-delay:.08s}.fi.d2{transition-delay:.16s}.fi.d3{transition-delay:.24s}
+</style>
+</head>
+<body>
+<div id="header-root"></div>
+
+<!-- Lightbox -->
+<div id="lb" onclick="if(event.target===this)closeLb()">
+  <img id="lbImg" src="" alt="">
+  <button id="lbClose" onclick="closeLb()">✕</button>
+</div>
+<script>
+function openLb(src){document.getElementById('lbImg').src=src;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()})
+</script>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="ph-inner">
+    <div class="ph-crumb"><a href="../index.html">Inicio</a><span>›</span><span>Instalaciones</span></div>
+    <h1 class="ph-title">Nuestras Instalaciones</h1>
+    <p class="ph-sub">Espacios modernos, equipados y confortables para tu atención</p>
+  </div>
+</div>
+
+<!-- ═══ EXTERIOR ═══ -->
+<div class="cat-block">
+  <div class="wrap">
+    <div class="cat-header fi">
+      <span class="cat-badge">📸 Exterior</span>
+      <h2 class="cat-title">Fachada e Ingreso</h2>
+    </div>
+    <div class="gal fi d1">
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_establecimiento_fuera.jpg')">
+        <img src="../assets/fotos/web_establecimiento_fuera.jpg" alt="Fachada principal" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Fachada Principal</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_establecimiento_fuera_2.jpg')">
+        <img src="../assets/fotos/web_establecimiento_fuera_2.jpg" alt="Vista exterior" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Vista Exterior</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_parqueo.jpg')">
+        <img src="../assets/fotos/web_parqueo.jpg" alt="Área de parqueo" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Área de Parqueo</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RECEPCIÓN ═══ -->
+<div class="cat-block">
+  <div class="wrap">
+    <div class="cat-header fi">
+      <span class="cat-badge">🏥 Interior</span>
+      <h2 class="cat-title">Recepción y Sala de Espera</h2>
+    </div>
+    <div class="gal fi d1">
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_recepcion.jpg')">
+        <img src="../assets/fotos/web_recepcion.jpg" alt="Recepción" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Recepción</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_recepcion_3.jpg')">
+        <img src="../assets/fotos/web_recepcion_3.jpg" alt="Área de recepción" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Área de Recepción</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_sala_de_espera_3.jpg')">
+        <img src="../assets/fotos/web_sala_de_espera_3.jpg" alt="Sala de espera" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Sala de Espera</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_salal_de_espera_2.jpg')">
+        <img src="../assets/fotos/web_salal_de_espera_2.jpg" alt="Sala de espera" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Sala de Espera</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EQUIPOS ═══ -->
+<div class="cat-block">
+  <div class="wrap">
+    <div class="cat-header fi">
+      <span class="cat-badge">💠 Equipos</span>
+      <h2 class="cat-title">Tecnología de Diagnóstico</h2>
+    </div>
+    <div class="gal fi d1">
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_ultrasonido.jpg')">
+        <img src="../assets/fotos/web_ultrasonido.jpg" alt="Equipo de ultrasonido" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Equipo de Ultrasonido</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_ultrasonido_2.jpg')">
+        <img src="../assets/fotos/web_ultrasonido_2.jpg" alt="Tomógrafo CT" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Tomógrafo CT</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_movil.jpg')">
+        <img src="../assets/fotos/web_movil.jpg" alt="Equipo de rayos X" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Equipo de Rayos X</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_recepcion.jpg')">
+        <img src="../assets/fotos/web_recepcion.jpg" alt="Laboratorio" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Laboratorio</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SANITARIOS ═══ -->
+<div class="cat-block">
+  <div class="wrap">
+    <div class="cat-header fi">
+      <span class="cat-badge">✨ Comodidades</span>
+      <h2 class="cat-title">Instalaciones Complementarias</h2>
+    </div>
+    <div class="gal fi d1">
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_banos.jpg')">
+        <img src="../assets/fotos/web_banos.jpg" alt="Baños" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Sanitarios</span></div>
+      </div>
+      <div class="gal-item" onclick="openLb('../assets/fotos/web_banos_2.jpg')">
+        <img src="../assets/fotos/web_banos_2.jpg" alt="Sala de procedimientos" loading="lazy">
+        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Sala de Procedimientos</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="footer-root"></div>
+<div id="chatbot-root"></div>
+<script src="../js/components.js"></script>
+<script>
+  document.getElementById('header-root').innerHTML = renderNavbar('instalaciones', false);
+  document.getElementById('footer-root').innerHTML = renderFooter(false);
+  document.getElementById('chatbot-root').innerHTML = renderChatbot();
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Environment variables - NUNCA subir al repo
+.env
+.env.local
+.env.production
+
+# Node
+node_modules/
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
