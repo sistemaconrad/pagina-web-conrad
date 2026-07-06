@@ -5,30 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Médicos Referentes – CONRAD Centro de Diagnóstico</title>
   <link rel="stylesheet" href="../css/main.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
+body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
 
 /* ══ HERO FULL BLEED ══ */
 .ref-hero{
   min-height:100vh;
-  background:linear-gradient(135deg,#020a06 0%,#051a12 30%,#0a2a1a 60%,#041510 100%);
+  background:linear-gradient(150deg,#0A3A4A 0%,#0C4B57 60%,#0B8286 140%);
   position:relative;overflow:hidden;
   display:flex;align-items:stretch;
-  padding-top:70px;
+  padding-top:104px;
 }
 
 /* Animated orbs */
 .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:orbF 8s ease-in-out infinite}
-.o1{width:700px;height:700px;background:rgba(0,196,180,.22);top:-200px;right:-150px;animation-delay:0s}
+.o1{width:700px;height:700px;background:rgba(53,191,201,.22);top:-200px;right:-150px;animation-delay:0s}
 .o2{width:400px;height:400px;background:rgba(16,185,129,.15);bottom:-100px;left:-80px;animation-delay:-3s}
 .o3{width:300px;height:300px;background:rgba(245,158,11,.08);top:40%;left:35%;animation-delay:-5s}
 @keyframes orbF{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-20px) scale(1.04)}}
 
 /* Grid pattern */
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,196,180,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,196,180,.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(53,191,201,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(53,191,201,.05) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
 
 /* Diagonal divider */
 .hero-split{
@@ -46,18 +46,18 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 
 .badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,196,180,.12);
-  border:1px solid rgba(0,196,180,.3);
-  color:#00c4b4;font-size:.72rem;font-weight:800;
+  background:rgba(53,191,201,.12);
+  border:1px solid rgba(53,191,201,.3);
+  color:#35BFC9;font-size:.72rem;font-weight:800;
   letter-spacing:.14em;text-transform:uppercase;
   padding:5px 16px;border-radius:100px;
   margin-bottom:2rem;width:fit-content;
 }
-.badge-dot{width:8px;height:8px;background:#00c4b4;border-radius:50%;animation:bdot 2s infinite;box-shadow:0 0 0 0 rgba(0,196,180,.5)}
-@keyframes bdot{0%{box-shadow:0 0 0 0 rgba(0,196,180,.5)}70%{box-shadow:0 0 0 8px rgba(0,196,180,0)}100%{box-shadow:0 0 0 0 rgba(0,196,180,0)}}
+.badge-dot{width:8px;height:8px;background:#35BFC9;border-radius:50%;animation:bdot 2s infinite;box-shadow:0 0 0 0 rgba(53,191,201,.5)}
+@keyframes bdot{0%{box-shadow:0 0 0 0 rgba(53,191,201,.5)}70%{box-shadow:0 0 0 8px rgba(53,191,201,0)}100%{box-shadow:0 0 0 0 rgba(53,191,201,0)}}
 
 .hero-title{
-  font-family:'Playfair Display',serif;
+  font-family:'Sora',sans-serif;
   font-size:clamp(3.5rem,7vw,6rem);
   font-weight:800;line-height:1.0;
   letter-spacing:-.03em;
@@ -66,12 +66,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 }
 .hero-title .t1{display:block;color:#fff}
 .hero-title .t2{display:block;color:#fff}
-.hero-title .t3{
-  display:block;font-style:italic;
-  background:linear-gradient(90deg,#00c4b4,#10b981,#f59e0b);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  background-size:200%;animation:gshift 3s ease infinite;
-}
+.hero-title .t3{display:block;color:#7ED4D7}
 @keyframes gshift{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
 
 .hero-sub{color:rgba(255,255,255,.65);font-size:1.05rem;line-height:1.75;max-width:480px;margin-bottom:2.5rem}
@@ -88,23 +83,22 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
   transition:all .25s;overflow:hidden;position:relative;
   text-decoration:none;display:block;
 }
-.choice::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;background:linear-gradient(135deg,rgba(0,196,180,.15),transparent)}
+.choice::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;background:linear-gradient(135deg,rgba(53,191,201,.15),transparent)}
 .choice:hover::before,.choice.active::before{opacity:1}
-.choice:hover,.choice.active{border-color:rgba(0,196,180,.5);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
-.choice.portal-btn{border-color:rgba(0,196,180,.35);background:rgba(0,196,180,.1)}
+.choice:hover,.choice.active{border-color:rgba(53,191,201,.5);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.choice.portal-btn{border-color:rgba(53,191,201,.35);background:rgba(53,191,201,.1)}
 .choice-emoji{font-size:2rem;display:block;margin-bottom:.7rem}
 .choice-title{font-weight:800;font-size:.92rem;color:#fff;margin-bottom:.25rem}
 .choice-sub{font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.4}
-.choice-arrow{position:absolute;bottom:.9rem;right:.9rem;color:#00c4b4;font-size:.95rem;transition:transform .2s}
+.choice-arrow{position:absolute;bottom:.9rem;right:.9rem;color:#35BFC9;font-size:.95rem;transition:transform .2s}
 .choice:hover .choice-arrow{transform:translateX(3px)}
 
 /* Stats row */
 .hero-stats{display:flex;gap:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08)}
 .hs-n{
-  font-family:'Playfair Display',serif;
+  font-family:'Sora',sans-serif;
   font-size:1.8rem;font-weight:700;line-height:1;
-  background:linear-gradient(135deg,#00c4b4,#10b981);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  color:#7ED4D7;
 }
 .hs-l{font-size:.68rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;font-weight:700}
 
@@ -113,11 +107,11 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
   position:relative;
   display:flex;flex-direction:column;justify-content:center;
   padding:clamp(3rem,5vw,5rem) clamp(2rem,4vw,4rem);
-  border-left:1px solid rgba(0,196,180,.12);
+  border-left:1px solid rgba(53,191,201,.12);
 }
 .hero-right::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(0,196,180,.08) 0%,rgba(16,185,129,.05) 50%,transparent 100%);
+  background:linear-gradient(135deg,rgba(53,191,201,.08) 0%,rgba(16,185,129,.05) 50%,transparent 100%);
 }
 
 /* Visitadora card */
@@ -126,17 +120,17 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
   font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(255,255,255,.4);margin-bottom:1.4rem;display:flex;align-items:center;gap:.5rem;
 }
-.vcard-sup::before{content:'';display:block;width:20px;height:1.5px;background:rgba(0,196,180,.5)}
+.vcard-sup::before{content:'';display:block;width:20px;height:1.5px;background:rgba(53,191,201,.5)}
 
 .vcard-avatar{
   width:90px;height:90px;
-  background:linear-gradient(135deg,#00c4b4,#10b981);
+  background:linear-gradient(135deg,#35BFC9,#0FA3A8);
   border-radius:50%;display:flex;align-items:center;justify-content:center;
   font-size:2.6rem;margin-bottom:1.3rem;
-  box-shadow:0 0 0 4px rgba(0,196,180,.2),0 0 0 8px rgba(0,196,180,.08),0 8px 32px rgba(0,196,180,.3);
+  box-shadow:0 0 0 4px rgba(53,191,201,.2),0 0 0 8px rgba(53,191,201,.08),0 8px 32px rgba(53,191,201,.3);
 }
 .vcard-name{
-  font-family:'Playfair Display',serif;
+  font-family:'Sora',sans-serif;
   font-size:1.7rem;font-weight:700;color:#fff;margin-bottom:.3rem;
 }
 .vcard-role{color:rgba(255,255,255,.45);font-size:.87rem;margin-bottom:2rem}
@@ -144,7 +138,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 /* Contact items */
 .vcard-contacts{
   background:rgba(0,0,0,.25);
-  border:1px solid rgba(0,196,180,.2);
+  border:1px solid rgba(53,191,201,.2);
   border-radius:18px;padding:1.2rem;
   margin-bottom:1.5rem;
   backdrop-filter:blur(12px);
@@ -153,8 +147,8 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 .vci:last-child{border-bottom:none}
 .vci-icon{
   width:38px;height:38px;
-  background:linear-gradient(135deg,rgba(0,196,180,.25),rgba(0,196,180,.08));
-  border:1px solid rgba(0,196,180,.25);
+  background:linear-gradient(135deg,rgba(53,191,201,.25),rgba(53,191,201,.08));
+  border:1px solid rgba(53,191,201,.25);
   border-radius:10px;display:flex;align-items:center;justify-content:center;
   font-size:1rem;flex-shrink:0;
 }
@@ -178,13 +172,13 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 /* Mini stats */
 .vcard-mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-top:1.3rem}
 .vm{
-  background:rgba(0,196,180,.08);
-  border:1px solid rgba(0,196,180,.2);
+  background:rgba(53,191,201,.08);
+  border:1px solid rgba(53,191,201,.2);
   border-radius:12px;padding:.8rem .5rem;text-align:center;
   transition:all .2s;
 }
-.vm:hover{background:rgba(0,196,180,.15);border-color:rgba(0,196,180,.4)}
-.vm-n{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#00c4b4}
+.vm:hover{background:rgba(53,191,201,.15);border-color:rgba(53,191,201,.4)}
+.vm-n{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700;color:#35BFC9}
 .vm-l{font-size:.65rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.07em;margin-top:2px;font-weight:700}
 
 /* ══ BENEFITS SECTION ══ */
@@ -195,19 +189,19 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 }
 .ben-sec::before{
   content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(to right,#00c4b4,#10b981,#f59e0b,#7c3aed);
+  background:linear-gradient(to right,#35BFC9,#0FA3A8,#f59e0b,#7c3aed);
 }
 .container{max-width:1100px;margin:0 auto;padding:0 clamp(1.5rem,4vw,2.5rem)}
 
 .sec-pill{
   display:inline-block;
-  background:rgba(0,196,180,.1);color:#00a89a;
+  background:rgba(53,191,201,.1);color:#0B8286;
   font-size:.71rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
   padding:4px 14px;border-radius:100px;
-  border:1px solid rgba(0,196,180,.2);margin-bottom:1rem;
+  border:1px solid rgba(53,191,201,.2);margin-bottom:1rem;
 }
 .sec-title{
-  font-family:'Playfair Display',serif;
+  font-family:'Sora',sans-serif;
   font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;
   color:#1e293b;letter-spacing:-.025em;margin-bottom:.75rem;
 }
@@ -227,16 +221,15 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
   background:#fff;
 }
 .ben-item:hover{
-  border-color:rgba(0,196,180,.35);
-  background:linear-gradient(135deg,rgba(0,196,180,.03),#fff);
+  border-color:rgba(53,191,201,.35);
+  background:linear-gradient(135deg,rgba(53,191,201,.03),#fff);
   transform:translateX(4px);
-  box-shadow:0 4px 20px rgba(0,196,180,.1);
+  box-shadow:0 4px 20px rgba(53,191,201,.1);
 }
 .ben-num{
-  font-family:'Playfair Display',serif;
+  font-family:'Sora',sans-serif;
   font-size:2.2rem;font-weight:800;
-  background:linear-gradient(135deg,#00c4b4,#10b981);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  color:#7ED4D7;
   line-height:1;flex-shrink:0;width:48px;text-align:center;padding-top:2px;
 }
 .ben-content h3{font-size:1rem;font-weight:800;color:#1e293b;margin-bottom:.4rem}
@@ -257,18 +250,18 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 .cta-card{
   background:linear-gradient(160deg,#050e10,#071818);
   border-radius:24px;padding:2.2rem;
-  border:1.5px solid rgba(0,196,180,.2);
+  border:1.5px solid rgba(53,191,201,.2);
   box-shadow:0 24px 60px rgba(0,0,0,.2);
 }
 .cta-quote{
-  background:rgba(0,196,180,.08);
-  border-left:3px solid #00c4b4;
+  background:rgba(53,191,201,.08);
+  border-left:3px solid #35BFC9;
   border-radius:0 10px 10px 0;
   padding:1rem 1.2rem;margin-bottom:1.5rem;
 }
 .cta-quote p{color:rgba(255,255,255,.7);font-style:italic;font-size:.9rem;line-height:1.65}
 .cta-card h3{
-  font-family:'Playfair Display',serif;
+  font-family:'Sora',sans-serif;
   font-size:1.5rem;font-weight:700;color:#fff;
   margin-bottom:.6rem;line-height:1.2;
 }
@@ -276,14 +269,14 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 
 .btn-teal{
   display:flex;align-items:center;justify-content:center;gap:.6rem;
-  width:100%;background:linear-gradient(135deg,#00c4b4,#00a89a);
+  width:100%;background:linear-gradient(135deg,#35BFC9,#0B8286);
   color:#fff;font-weight:800;font-size:.92rem;
   padding:.9rem 1.5rem;border-radius:12px;
   text-decoration:none;transition:all .2s;
-  box-shadow:0 4px 20px rgba(0,196,180,.3);margin-bottom:.75rem;
-  border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
+  box-shadow:0 4px 20px rgba(53,191,201,.3);margin-bottom:.75rem;
+  border:none;cursor:pointer;font-family:'Sora',sans-serif;
 }
-.btn-teal:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,196,180,.45)}
+.btn-teal:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(53,191,201,.45)}
 .btn-glass{
   display:flex;align-items:center;justify-content:center;gap:.6rem;
   width:100%;background:transparent;
@@ -291,14 +284,14 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
   padding:.8rem 1.5rem;border-radius:12px;
   text-decoration:none;transition:all .2s;
   border:1.5px solid rgba(255,255,255,.12);
-  cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
+  cursor:pointer;font-family:'Sora',sans-serif;
 }
 .btn-glass:hover{border-color:rgba(255,255,255,.3);color:#fff}
 .btn-portal{
-  color:#00c4b4!important;
-  border-color:rgba(0,196,180,.3)!important;
+  color:#35BFC9!important;
+  border-color:rgba(53,191,201,.3)!important;
 }
-.btn-portal:hover{background:rgba(0,196,180,.08)!important;color:#00c4b4!important}
+.btn-portal:hover{background:rgba(53,191,201,.08)!important;color:#35BFC9!important}
 
 .cta-divider{
   margin:1.5rem 0;
@@ -318,10 +311,6 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
 
 <!-- ══ HERO ══ -->
 <section class="ref-hero">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="orb o3"></div>
-  <div class="hero-grid"></div>
 
   <div class="hero-split">
     <!-- LEFT -->

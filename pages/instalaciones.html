@@ -5,30 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instalaciones – CONRAD Centro de Diagnóstico</title>
   <link rel="stylesheet" href="../css/main.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#f7fafc;color:#071828;overflow-x:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:#f7fafc;color:#0A3A4A;overflow-x:hidden}
 
 .page-hero{
-  background:linear-gradient(160deg,#060d1a,#071828,#061c2a);
-  padding:calc(70px + 3rem) 0 3rem;
+  background:linear-gradient(180deg,#E7F5F6 0%,#fff 100%);
+  padding:calc(70px + 34px + 3rem) 0 3rem;
   text-align:center;position:relative;overflow:hidden;
 }
-.page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(13,208,208,.09) 1px,transparent 1px);background-size:32px 32px}
-.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(13,208,208,.35),transparent)}
+
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:#E3EDF0}
 .ph-inner{position:relative;z-index:1}
-.ph-crumb{display:flex;align-items:center;gap:.4rem;justify-content:center;font-size:.76rem;color:rgba(255,255,255,.35);margin-bottom:.75rem}
-.ph-crumb a{color:#0dcfcf}
-.ph-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:#fff;letter-spacing:-.025em;margin-bottom:.5rem}
-.ph-sub{color:rgba(255,255,255,.5);font-size:.95rem}
+.ph-crumb{display:flex;align-items:center;gap:.4rem;justify-content:center;font-size:.76rem;color:#94a3b8;margin-bottom:.75rem}
+.ph-crumb a{color:#0B8286;font-weight:600}
+.ph-title{font-family:'Sora',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:#0A3A4A;letter-spacing:-.025em;margin-bottom:.5rem}
+.ph-sub{color:#516673;font-size:.95rem}
 
 /* Lightbox */
 #lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);align-items:center;justify-content:center;padding:1rem}
 #lb.open{display:flex}
 #lbImg{max-width:95vw;max-height:92vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.8)}
-#lbClose{position:fixed;top:1rem;right:1.5rem;background:rgba(13,208,208,.15);border:1px solid rgba(13,208,208,.35);color:#0dcfcf;width:42px;height:42px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
-#lbClose:hover{background:rgba(13,208,208,.3)}
+#lbClose{position:fixed;top:1rem;right:1.5rem;background:rgba(15,163,168,.15);border:1px solid rgba(15,163,168,.35);color:#0FA3A8;width:42px;height:42px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#lbClose:hover{background:rgba(15,163,168,.3)}
 
 /* Main */
 .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem)}
@@ -41,11 +41,11 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#f7fafc;color:#071828
 .cat-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
 .cat-badge{
   display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(10,168,170,.1);border:1px solid rgba(10,168,170,.25);
-  color:#088a8c;font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  background:rgba(15,163,168,.1);border:1px solid rgba(15,163,168,.25);
+  color:#0B8286;font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
   padding:5px 14px;border-radius:100px;white-space:nowrap;
 }
-.cat-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:800;color:#071828;letter-spacing:-.02em}
+.cat-title{font-family:'Sora',sans-serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:800;color:#0A3A4A;letter-spacing:-.02em}
 
 /* Gallery grid */
 .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
@@ -178,28 +178,6 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()})
     </div>
   </div>
 </div>
-
-<!-- ═══ SANITARIOS ═══ -->
-<div class="cat-block">
-  <div class="wrap">
-    <div class="cat-header fi">
-      <span class="cat-badge">✨ Comodidades</span>
-      <h2 class="cat-title">Instalaciones Complementarias</h2>
-    </div>
-    <div class="gal fi d1">
-      <div class="gal-item" onclick="openLb('../assets/fotos/web_banos.jpg')">
-        <img src="../assets/fotos/web_banos.jpg" alt="Baños" loading="lazy">
-        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Sanitarios</span></div>
-      </div>
-      <div class="gal-item" onclick="openLb('../assets/fotos/web_banos_2.jpg')">
-        <img src="../assets/fotos/web_banos_2.jpg" alt="Sala de procedimientos" loading="lazy">
-        <div class="gal-overlay"><span class="gal-label"><span class="zoom-ic">🔍</span> Sala de Procedimientos</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 <div id="footer-root"></div>
 <div id="chatbot-root"></div>

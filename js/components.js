@@ -12,6 +12,10 @@ function renderNavbar(activePage = '', isRoot = true) {
     { href: '/pages/contacto.html',      label: 'Contacto',            id: 'contacto' },
   ];
   return `
+<div class="announce-bar">
+  <span>📋 Centro de Diagnóstico en Chimaltenango · ☎ 7725-2722 ·</span>
+  <a href="/portal-medico.html">Portal Médico</a>
+</div>
 <nav class="navbar" id="mainNav">
   <a class="navbar-logo" href="/">
     <img src="${base}assets/img/logo.png" alt="CONRAD" onerror="this.style.display='none'">
@@ -20,7 +24,7 @@ function renderNavbar(activePage = '', isRoot = true) {
   <button class="nav-toggle" id="navToggle" aria-label="Menú">☰</button>
   <div class="navbar-links" id="navLinks">
     ${pages.map(p => `<a href="${p.href}" class="${activePage===p.id?'active':''}">${p.label}</a>`).join('')}
-    <a href="https://wa.me/50254605569" target="_blank" class="btn nav-cta">💬 WhatsApp</a>
+    <a href="https://wa.me/50254605569?text=Hola%20CONRAD%2C%20quisiera%20agendar%20un%20estudio" target="_blank" class="btn nav-cta">Agenda tu cita</a>
   </div>
 </nav>`;
 }
@@ -71,7 +75,7 @@ function renderFooter(isRoot = true) {
 // ── CHATBOT ──
 function renderChatbot() {
   return `
-<button class="chatbot-toggle" id="chatToggle" title="Chat con CONRAD">🤖</button>
+<button class="chatbot-toggle" id="chatToggle" title="Chat con CONRAD">💬</button>
 <div class="chatbot-window" id="chatWindow">
   <div class="chat-header">
     <div class="chat-avatar">🏥</div>
