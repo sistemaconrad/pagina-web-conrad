@@ -12,10 +12,6 @@ function renderNavbar(activePage = '', isRoot = true) {
     { href: '/pages/contacto.html',      label: 'Contacto',            id: 'contacto' },
   ];
   return `
-<div class="announce-bar">
-  <span>📋 Centro de Diagnóstico en Chimaltenango · ☎ 7725-2722 ·</span>
-  <a href="/portal-medico.html">Portal Médico</a>
-</div>
 <nav class="navbar" id="mainNav">
   <a class="navbar-logo" href="/">
     <img src="${base}assets/img/logo.png" alt="CONRAD" onerror="this.style.display='none'">
@@ -62,6 +58,7 @@ function renderFooter(isRoot = true) {
         <a href="tel:77252722">📞 7725-2722</a>
         <a href="https://wa.me/50254605569" target="_blank">💬 WhatsApp 5460-5569</a>
         <a href="${base}pages/referentes.html">👩‍⚕️ Visitadora Médica</a>
+        <a href="/portal-medico.html">📊 Portal Médico</a>
       </div>
     </div>
     <div class="footer-bottom">

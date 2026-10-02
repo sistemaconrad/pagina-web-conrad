@@ -17,7 +17,7 @@ body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
   background:linear-gradient(150deg,#0A3A4A 0%,#0C4B57 60%,#0B8286 140%);
   position:relative;overflow:hidden;
   display:flex;align-items:stretch;
-  padding-top:104px;
+  padding-top:70px;
 }
 
 /* Animated orbs */
@@ -299,6 +299,25 @@ body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
 }
 .cta-sub{font-size:.73rem;color:rgba(255,255,255,.25);text-align:center;margin-bottom:.75rem}
 
+
+/* ══ OPINIONES DE MÉDICOS ══ */
+.op-sec{background:#F6FAFB;padding:clamp(4rem,8vw,6rem) 0}
+.op-head{text-align:center;max-width:620px;margin:0 auto 2.8rem}
+.op-head .sec-desc{margin:0 auto}
+.op-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:960px;margin:0 auto}
+.op-card{background:#fff;border:1px solid #E3EDF0;border-radius:20px;padding:1.9rem;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.op-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(10,58,74,.1)}
+.op-stars{color:#F5A623;letter-spacing:2px;margin-bottom:.9rem}
+.op-quote{color:#516673;font-size:.95rem;line-height:1.75;margin-bottom:1.4rem;flex:1}
+.op-foot{display:flex;align-items:center;gap:.85rem;border-top:1px solid #E3EDF0;padding-top:1.1rem}
+.op-ava{width:44px;height:44px;border-radius:50%;background:#E7F5F6;color:#0B8286;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800}
+.op-name{font-weight:700;color:#0A3A4A;font-size:.92rem}
+.op-role{font-size:.78rem;color:#516673}
+.op-invite{background:linear-gradient(150deg,#0A3A4A,#0C4B57);border-color:transparent;justify-content:center;text-align:center;align-items:center}
+.op-invite h3{font-family:'Sora',sans-serif;color:#fff;font-size:1.2rem;margin-bottom:.6rem}
+.op-invite p{color:rgba(255,255,255,.75);font-size:.9rem;line-height:1.65;margin-bottom:1.3rem}
+.op-invite a{background:#25d366;color:#fff;font-weight:700;font-size:.9rem;padding:.7rem 1.6rem;border-radius:100px}
+
 /* fade in */
 .fi{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .fi.visible{opacity:1;transform:none}
@@ -432,6 +451,18 @@ body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
   </div>
 </section>
 
+<!-- ══ OPINIONES DE MÉDICOS REFERENTES ══ -->
+<section class="op-sec" id="opiniones">
+  <div class="container">
+    <div class="op-head fi">
+      <div class="sec-pill">Opiniones</div>
+      <h2 class="sec-title">Lo que opinan nuestros<br>médicos referentes</h2>
+      <p class="sec-desc">La experiencia de quienes ya confían sus pacientes a CONRAD.</p>
+    </div>
+    <div class="op-grid" id="opGrid"></div>
+  </div>
+</section>
+
 <div id="footer-root"></div>
 <div id="chatbot-root"></div>
 <script src="../js/components.js"></script>
@@ -439,6 +470,30 @@ body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
   document.getElementById('header-root').innerHTML = renderNavbar('referentes', false);
   document.getElementById('footer-root').innerHTML = renderFooter(false);
   document.getElementById('chatbot-root').innerHTML = renderChatbot();
+  
+  // ─── OPINIONES (agrega más objetos a esta lista para mostrar más testimonios) ───
+  const OPINIONES = [
+    { texto: 'Llevo 2 años enviando a mis pacientes a CONRAD y siempre me reportan que la atención es excelente. Los resultados llegan rápido y con calidad diagnóstica muy buena. Lo recomiendo a todos mis colegas.',
+      nombre: 'Dra. Maria Gonzales', rol: 'Médico referente — Comalapa' },
+  ];
+  const waOp = 'https://wa.me/50231109147?text=Hola%2C%20quiero%20compartir%20mi%20opini%C3%B3n%20como%20M%C3%A9dico%20Referente%20de%20CONRAD';
+  document.getElementById('opGrid').innerHTML = OPINIONES.map(o => `
+    <div class="op-card fi">
+      <div class="op-stars">★★★★★</div>
+      <p class="op-quote">"${o.texto}"</p>
+      <div class="op-foot">
+        <div class="op-ava">${o.nombre.replace(/^(Dra?\.\s*)/,'').charAt(0)}</div>
+        <div><div class="op-name">${o.nombre}</div><div class="op-role">${o.rol}</div></div>
+      </div>
+    </div>`).join('') + `
+    <div class="op-card op-invite fi">
+      <h3>¿Eres médico referente?</h3>
+      <p>Cuéntanos tu experiencia con CONRAD. Tu opinión ayuda a otros colegas a conocernos.</p>
+      <a href="${waOp}" target="_blank">💬 Compartir mi opinión</a>
+    </div>`;
+  const opIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); opIO.unobserve(e.target); } }), { threshold: .05 });
+  document.querySelectorAll('#opiniones .fi').forEach(el => opIO.observe(el));
+
   if(document.querySelector('.footer')) document.querySelector('.footer').style.background='#030a06';
 </script>
 </body>
