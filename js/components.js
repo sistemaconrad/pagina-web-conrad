@@ -62,8 +62,8 @@ function renderFooter(isRoot = true) {
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 CONRAD Centro de Diagnóstico. Todos los derechos reservados.</span>
-      <span style="color:rgba(255,255,255,0.25);">Chimaltenango, Guatemala</span>
+      <span class="fb-copy">© 2026 CONRAD Centro de Diagnóstico. Todos los derechos reservados.</span>
+      <a class="fb-dev" href="https://www.codenest.business/" target="_blank" rel="noopener" aria-label="Desarrollado por CodeNest"><img src="${base}assets/codenest.png" alt="" width="30" height="30" loading="lazy"><span>codenest</span></a>
     </div>
   </div>
 </footer>`;

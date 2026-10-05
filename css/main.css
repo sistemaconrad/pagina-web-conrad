@@ -575,6 +575,15 @@ a { text-decoration: none; }
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem;
   font-size: 0.72rem;
 }
+.fb-dev { display: inline-flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.6); font-size: .78rem; font-weight: 600; letter-spacing: .02em; opacity: .9; transition: opacity .2s, color .2s; }
+.fb-dev img { width: 30px; height: 30px; border-radius: 50%; display: block; }
+.fb-dev:hover { opacity: 1; color: #fff; }
+/* Móvil: pie mínimo — solo derechos reservados + CodeNest */
+@media(max-width:700px) {
+  .footer { padding: .9rem 0 .8rem; }
+  .footer-grid { display: none; }
+  .footer-bottom { border-top: none; padding: 0 4.2rem 0 0; margin: 0; flex-direction: column; align-items: flex-start; gap: .55rem; font-size: .68rem; line-height: 1.45; }
+}
 
 /* ═══ CHATBOT ═══ */
 .chatbot-toggle {
