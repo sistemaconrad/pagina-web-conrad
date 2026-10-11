@@ -5,7 +5,7 @@ function renderNavbar(activePage = '', isRoot = true) {
   const base = isRoot ? '' : '../';
   const pages = [
     { href: '/',               label: 'Inicio',              id: 'home' },
-    { href: '/pages/servicios.html',     label: 'Servicios',           id: 'servicios' },
+    { href: '/#servicios',     label: 'Servicios',           id: 'servicios' },
     { href: '/pages/instalaciones.html', label: 'Instalaciones',       id: 'instalaciones' },
     { href: '/pages/recorrido.html',     label: 'Recorrido',           id: 'recorrido' },
     { href: '/pages/referentes.html',    label: 'Médicos Referentes',  id: 'referentes' },
@@ -14,7 +14,7 @@ function renderNavbar(activePage = '', isRoot = true) {
   return `
 <nav class="navbar" id="mainNav">
   <a class="navbar-logo" href="/">
-    <img src="${base}assets/img/logo.png" alt="CONRAD" onerror="this.style.display='none'">
+    <img src="${base}assets/fotos/logo.png" alt="CONRAD" onerror="this.style.display='none'">
     <span class="navbar-brand">CON<span>RAD</span></span>
   </a>
   <button class="nav-toggle" id="navToggle" aria-label="Menú">☰</button>
@@ -33,17 +33,17 @@ function renderFooter(isRoot = true) {
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="${base}assets/img/logo.png" alt="CONRAD" onerror="this.style.display='none'">
+        <img src="${base}assets/fotos/logo.png" alt="CONRAD" onerror="this.style.display='none'">
         <p>Centro de Diagnóstico CONRAD – diagnóstico de precisión para tu salud. Chimaltenango, Guatemala.</p>
       </div>
       <div class="footer-col">
         <h4>Servicios</h4>
-        <a href="${base}pages/servicios.html#rayos-x">Rayos X</a>
-        <a href="${base}pages/servicios.html#ultrasonido">Ultrasonidos</a>
-        <a href="${base}pages/servicios.html#tomografia">Tomografías</a>
-        <a href="${base}pages/servicios.html#laboratorio">Laboratorio</a>
-        <a href="${base}pages/servicios.html#mamografia">Mamografías</a>
-        <a href="${base}pages/servicios.html#ecg">Electrocardiograma</a>
+        <a href="/#rayos-x">Rayos X</a>
+        <a href="/#ultrasonido">Ultrasonidos</a>
+        <a href="/#tomografia">Tomografías</a>
+        <a href="/#laboratorio">Laboratorio</a>
+        <a href="/#mamografia">Mamografías</a>
+        <a href="/#ecg">Electrocardiograma</a>
       </div>
       <div class="footer-col">
         <h4>Empresa</h4>
